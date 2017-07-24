@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.get('/', function(req, res) {
 console.log('reached get');   
     console.log(req.body);
-    res.send('Hello world get');
+    res.send('Hello world get' + req.query);
 });
 
 app.post('/', function(req, res) {
