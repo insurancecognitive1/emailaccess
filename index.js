@@ -20,7 +20,7 @@ console.log('reached get');
     console.log(req.query.code);
     var jsonreq = JSON.stringify({"client_id": "c6f36595-cad5-4861-8dd7-b6849cab70bd","scope":"mail.read","code":req.query.code,"client_secret":"X5gnN89guhOP6v6eyubQXwP","redirect_uri":"https://emailaccess.herokuapp.com","grant_type":"authorization_code"});
     console.log(jsonreq);
-    httpreq({
+    /*httpreq({
     url: "https://login.microsoftonline.com/common/oauth2/v2.0/token",
     method: "POST",
     headers: {
@@ -31,7 +31,7 @@ console.log('reached get');
     console.log(response);
         var tokenresponse=response;
 res.send('Hello world get '  + tokenresponse);
-});
+});*/
     
 });
 
