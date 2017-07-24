@@ -2,6 +2,9 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 
+var httpreq = require('request');
+var jsonreq = {"client_id": "c6f36595-cad5-4861-8dd7-b6849cab70bd","scope"="mail.read","code"="M130722b4-1c3d-72f7-2521-dada13ec9c89","client_secret"="X5gnN89guhOP6v6eyubQXwP","redirect_uri"="https://emailaccess.herokuapp.com","grant_type"="authorization_code"}
+
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -15,7 +18,21 @@ app.use(bodyParser.json());
 app.get('/', function(req, res) {
 console.log('reached get');   
     console.log(req.query.code);
-    res.send('Hello world get' + req.query.code);
+    var jsonreq = JSON.stringify({"client_id": "c6f36595-cad5-4861-8dd7-b6849cab70bd","scope"="mail.read","code"=req.query.code,"client_secret"="X5gnN89guhOP6v6eyubQXwP","redirect_uri"="https://emailaccess.herokuapp.com","grant_type"="authorization_code"});
+    console.log(jsonreq);
+    httpreq({
+    url: "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+    method: "POST",
+    headers: {
+        "content-type": "application/x-www-form-urlencoded",  // <--Very important!!!
+    },
+    body: jsonreq
+}, function (error, response, body){
+    console.log(response);
+        var tokenresponse=response;
+res.send('Hello world get '  + tokenresponse);
+});
+    
 });
 
 app.post('/', function(req, res) {
