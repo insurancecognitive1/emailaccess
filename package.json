@@ -1,0 +1,26 @@
+{
+  "name": "node-js-sample",
+  "version": "0.2.0",
+  "description": "A sample Node.js app using Express 4",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.13.3",
+    "body-parser": "^1.17.2"
+  },
+  "engines": {
+    "node": "4.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/insurancecognitive1/newgetrank"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "author": "Cognitive"
+  }
