@@ -6,14 +6,15 @@ var bodyParser = require('body-parser');
 app.set('port', (process.env.PORT || 5000));
 
 //app.use(express.static(__dirname + '/public'));
-app.use(bodyParser.urlencoded({
+/*app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
+*/
 
 app.get('/', function(req, res) {
 console.log('reached get');   
-    console.log(req.body);
+    console.log(req.query);
     res.send('Hello world get' + req.query);
 });
 
