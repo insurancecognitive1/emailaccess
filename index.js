@@ -12,11 +12,15 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.get('/', function(req, res) {
-console.log('reached here');    
+console.log('reached get');   
+    console.log(req.body);
+    res.send('Hello world get');
 });
 
 app.post('/', function(req, res) {
-console.log('reached here');    
+console.log('reached post'); 
+    console.log(req.body);
+    res.send('Hello world post');
 });
 
 app.listen(app.get('port'), function() {
