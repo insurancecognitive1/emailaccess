@@ -11,6 +11,10 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
+app.get('/', function(req, res) {
+console.log('reached here');    
+});
+
 app.post('/', function(req, res) {
 console.log('reached here');    
 });
