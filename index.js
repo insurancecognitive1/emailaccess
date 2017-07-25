@@ -26,7 +26,7 @@ console.log('reached get');
     headers: {
         "content-type": "application/x-www-form-urlencoded",  // <--Very important!!!
     },
-    qs: jsonreq
+    form: jsonreq
     }, function (error, response, body){
 console.log('Error' ,error);
         console.log('Response',response);
