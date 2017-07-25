@@ -34,15 +34,20 @@ console.log('reached get');
         var bodyjson = JSON.parse(body);
         var tokenresponse=bodyjson.access_token;
         console.log('Token ',tokenresponse);
-        var client = MicrosoftGraph.Client.init({
+        getemail(tokenresponse);
+        console.log('Completed');
+    });
+    res.send('Hello world get ' );
+});
+
+function getemail(tokenresponse){
+var client = MicrosoftGraph.Client.init({
         authProvider: (done) => {
         done(null, tokenresponse);
              }
             }); //first parameter takes an error if you can't get an access token 
         console.log('connected successfully');
-    });
-    res.send('Hello world get ' );
-});
+}
 
 app.post('/', function(req, res) {
 console.log('reached post'); 
