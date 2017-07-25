@@ -29,9 +29,9 @@ console.log('reached get');
     form: jsonreq
     }, function (error, response, body){
 console.log('Error' ,error);
-        console.log('Response',response);
-        console.log('Body',body);
-        var tokenresponse=response;
+        //console.log('Response',response);
+        console.log('Body',body.access_token);
+        var tokenresponse=body.access_token;
     
 });
     res.send('Hello world get ' );
