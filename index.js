@@ -54,7 +54,12 @@ var client = MicrosoftGraph.Client.init({
             console.log(err)
             return;
         }
-        console.log(res);
+      //  console.log(res);
+        var jsonresp=JSON.parse(res).value[0];
+        console.log('subject ',jsonresp.subject);
+        console.log('bodypreview ',jsonresp.bodyPreview);
+        console.log('body ',jsonresp.body);
+        
     });
 }
 
