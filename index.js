@@ -54,22 +54,13 @@ var client = MicrosoftGraph.Client.init({
             console.log(err)
             return;
         }
-      //  console.log(res);
-        //var jsonresp=res;
-        //jsonresp=jsonresp.value[0];
-        for(var jsonresp in res.value)
-        {
-            console.log(jsonresp);
-            //console.log('subject ',jsonresp.subject);
-            //console.log('bodypreview ',jsonresp.bodyPreview);
-            //console.log('body ',jsonresp.body);
-        };
+      
        res.value.forEach(function(jsonresp)
         {
-            console.log(jsonresp);
-            //console.log('subject ',jsonresp.subject);
-            //console.log('bodypreview ',jsonresp.bodyPreview);
-            //console.log('body ',jsonresp.body);
+           // console.log(jsonresp);
+            console.log('subject ',jsonresp.subject);
+           console.log('bodypreview ',jsonresp.bodyPreview);
+           console.log('body ',jsonresp.body);
         });
         
     });
