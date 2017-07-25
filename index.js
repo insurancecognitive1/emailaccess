@@ -47,6 +47,15 @@ var client = MicrosoftGraph.Client.init({
              }
             }); //first parameter takes an error if you can't get an access token 
         console.log('connected successfully');
+    client
+    .api('/me/messages')
+    .get((err, res) => {
+        if (err) {
+            console.log(err)
+            return;
+        }
+        console.log(res);
+    });
 }
 
 app.post('/', function(req, res) {
