@@ -36,7 +36,7 @@ console.log('reached get');
         console.log('Token ',tokenresponse);
         getemail(tokenresponse,function(ret){
             console.log(ret);
-            res.send('Hello world get ' + ret);
+            res.send( ret);
         });
         console.log('Completed');
         
@@ -62,11 +62,11 @@ var client = MicrosoftGraph.Client.init({
        res.value.forEach(function(jsonresp)
         {
            // console.log(jsonresp);
-            console.log('subject ',jsonresp.subject);
-           console.log('bodypreview ',jsonresp.bodyPreview);
+           // console.log('subject ',jsonresp.subject);
+           //console.log('bodypreview ',jsonresp.bodyPreview);
            console.log('body ',jsonresp.body);
         });
-        cb(res.value[0].subject);
+        cb(res.value[0].body);
         
     });
 }
