@@ -26,11 +26,11 @@ console.log('reached get');
     headers: {
         "content-type": "application/x-www-form-urlencoded",  // <--Very important!!!
     },
-    body: jsonreq
+    qs: jsonreq
     }, function (error, response, body){
     console.log(response);
         var tokenresponse=response;
-res.send('Hello world get '  + tokenresponse);
+    res.send('Hello world get '  + tokenresponse);
 });
     
 });
