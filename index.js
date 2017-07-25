@@ -30,8 +30,10 @@ console.log('reached get');
     }, function (error, response, body){
 console.log('Error' ,error);
         //console.log('Response',response);
-        console.log('Body',body.access_token);
-        var tokenresponse=body.access_token;
+        console.log('Body',body);
+        var bodyjson = JSON.parse(body);
+        var tokenresponse=bodyjson.access_token;
+        console.log('Token ',tokenresponse);
     
 });
     res.send('Hello world get ' );
