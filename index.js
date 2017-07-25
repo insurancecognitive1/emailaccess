@@ -59,9 +59,10 @@ var client = MicrosoftGraph.Client.init({
         //jsonresp=jsonresp.value[0];
         for(var jsonresp in res.value)
         {
-            console.log('subject ',jsonresp.subject);
-            console.log('bodypreview ',jsonresp.bodyPreview);
-            console.log('body ',jsonresp.body);
+            console.log(jsonresp);
+            //console.log('subject ',jsonresp.subject);
+            //console.log('bodypreview ',jsonresp.bodyPreview);
+            //console.log('body ',jsonresp.body);
         }
         
     });
