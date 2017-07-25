@@ -34,13 +34,16 @@ console.log('reached get');
         var bodyjson = JSON.parse(body);
         var tokenresponse=bodyjson.access_token;
         console.log('Token ',tokenresponse);
-        getemail(tokenresponse);
+        getemail(tokenresponse,function(ret){
+            console.log(ret);
+        });
         console.log('Completed');
+        res.send('Hello world get ' );
     });
-    res.send('Hello world get ' );
+    
 });
 
-function getemail(tokenresponse){
+function getemail(tokenresponse,cb){
 var client = MicrosoftGraph.Client.init({
         authProvider: (done) => {
         done(null, tokenresponse);
@@ -62,6 +65,7 @@ var client = MicrosoftGraph.Client.init({
            console.log('bodypreview ',jsonresp.bodyPreview);
            console.log('body ',jsonresp.body);
         });
+        cb('Hello world');
         
     });
 }
