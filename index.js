@@ -36,7 +36,7 @@ console.log('reached get');
         console.log('Token ',tokenresponse);
         getemail(tokenresponse,function(ret){
             console.log(ret);
-            res.send( ret);
+            res.send( ret.content);
         });
         console.log('Completed');
         
