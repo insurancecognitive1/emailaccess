@@ -28,11 +28,13 @@ console.log('reached get');
     },
     body: jsonreq
     }, function (error, response, body){
-    console.log(response);
+console.log('Error' ,error);
+        console.log('Response',response);
+        console.log('Body',body);
         var tokenresponse=response;
-    res.send('Hello world get '  + tokenresponse);
-});
     
+});
+    res.send('Hello world get ' );
 });
 
 app.post('/', function(req, res) {
