@@ -28,7 +28,7 @@ console.log('reached get');
     },
     form: jsonreq
     }, function (error, response, body){
-console.log('Error' ,error);
+        console.log('Error' ,error);
         //console.log('Response',response);
         console.log('Body',body);
         var bodyjson = JSON.parse(body);
@@ -40,10 +40,7 @@ console.log('Error' ,error);
              }
             }); //first parameter takes an error if you can't get an access token 
         console.log('connected successfully');
-    }
-});
-    
-});
+    });
     res.send('Hello world get ' );
 });
 
