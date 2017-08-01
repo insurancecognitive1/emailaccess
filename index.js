@@ -8,7 +8,8 @@ const MicrosoftGraph = require("@microsoft/microsoft-graph-client");
 
 app.set('port', (process.env.PORT || 5000));
 
-app.use(express.static(__dirname + '/ui/index.html'));
+app.use(express.static(__dirname + '/ui'));
+
 /*app.use(bodyParser.urlencoded({
     extended: true
 }));
