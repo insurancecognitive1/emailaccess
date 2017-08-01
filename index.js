@@ -8,7 +8,7 @@ const MicrosoftGraph = require("@microsoft/microsoft-graph-client");
 
 app.set('port', (process.env.PORT || 5000));
 
-app.use(express.static(__dirname + '/public/index.html'));
+app.use(express.static(__dirname + '/ui/index.html'));
 /*app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -36,8 +36,8 @@ console.log('reached get');
         console.log('Token ',tokenresponse);
         getemail(tokenresponse,function(ret){
             console.log(ret);
-            //res.send( ret.content);
-            res.sendFile('ui/home.html', { root : __dirname});
+            res.send( ret.content);
+            //res.sendFile('ui/home.html', { root : __dirname});
         });
         console.log('Completed');
         
