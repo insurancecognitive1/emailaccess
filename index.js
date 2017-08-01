@@ -72,6 +72,12 @@ var client = MicrosoftGraph.Client.init({
     });
 }
 
+app.get('/', function(req, res) {
+console.log('reached get'); 
+   // console.log(req.body);
+    res.sendFile('ui/index.html', { root : __dirname});
+});
+
 app.post('/', function(req, res) {
 console.log('reached post'); 
     console.log(req.body);
