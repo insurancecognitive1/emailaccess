@@ -3,7 +3,7 @@ var app = express();
 var bodyParser = require('body-parser');
 
 var httpreq = require('request');
-//var jsonreq = {"client_id": "c6f36595-cad5-4861-8dd7-b6849cab70bd","scope":"mail.read","code"="M130722b4-1c3d-72f7-2521-dada13ec9c89","client_secret"="X5gnN89guhOP6v6eyubQXwP","redirect_uri"="https://emailaccess.herokuapp.com","grant_type"="authorization_code"}
+//var jsonreq = {"client_id": "c6f36595-cad5-4861-8dd7-b6849cab70bd","scope":"mail.read","code"="M130722b4-1c3d-72f7-2521-dada13ec9c89","client_secret"="X5gnN89guhOP6v6eyubQXwP","redirect_uri"="https://emailaccess.herokuapp.com/signin","grant_type"="authorization_code"}
 const MicrosoftGraph = require("@microsoft/microsoft-graph-client");
 
 app.set('port', (process.env.PORT || 5000));
