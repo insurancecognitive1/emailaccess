@@ -8,14 +8,14 @@ const MicrosoftGraph = require("@microsoft/microsoft-graph-client");
 
 app.set('port', (process.env.PORT || 5000));
 
-//app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public/index.html'));
 /*app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
 */
 
-app.get('/', function(req, res) {
+app.get('/signin', function(req, res) {
 console.log('reached get');   
     console.log(req.query.code);
     var jsonreq = {grant_type:"authorization_code",client_id: "c6f36595-cad5-4861-8dd7-b6849cab70bd",scope:"mail.read",code:req.query.code,client_secret:"X5gnN89guhOP6v6eyubQXwP",redirect_uri:"https://emailaccess.herokuapp.com"};
