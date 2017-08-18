@@ -22,11 +22,12 @@ $(document).ready(function() {
            //document.getElementById('content').value = result;
            console.log("Json resp: " +JSON.stringify(result,0,2));
 	   var emailcontent;
-	   emailcontent = result.replace(/<br>/gm, "\br");
-	   
+	   //emailcontent = result.replace(/<br>/gm, "\br");
+		emailcontent = result.replace(/<br\s*[\/]?>/gi, "newbreakline");
+	         console.log("replaced breakline Json resp: " +JSON.stringify(emailcontent,0,2));
 	   emailcontent = $(result).text();
 	   emailcontent = emailcontent.replace(/(\r\n|\n)/gm,"");
-	   emailcontent = emailcontent.replace(/\br/gm,"\n");
+	   emailcontent = emailcontent.replace(/"newbreakline"/gm,"\n");
 	   console.log("Text format: " +JSON.stringify(emailcontent,0,2));
            $('#content').text(emailcontent);
        	}
