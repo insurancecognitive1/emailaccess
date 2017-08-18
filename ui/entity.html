@@ -92,13 +92,13 @@ $("#button_classify").click(function(){
       console.log("On Click nlc");
       var content=document.getElementById('content').value;
 //      content = '"' + content + '"';
-	  var context = {};
-	  content = content.replace(/(\r\n|\n|\r|\t)/gm,"");
+      var context = {};
+      content = content.replace(/(\r\n|\n|\r|\t)/gm,"");
       var email_data = {
         'text': content,
         'context': context
       }; 
-    console.log(email_data);
+      console.log(email_data);
       $.post("/api/emailclassify", email_data, function(result) {
       	
       	console.log("Json resp: " +result);
@@ -111,8 +111,8 @@ $("#button_classify").click(function(){
 	   document.getElementById('result_json').innerHTML = "Classified as " + "<b>" + intent + "</b>";
             //$('#result_json').text('Classified as ' +intent);
            // if (!resp.result.hasOwnProperty("code")) { }
-       	}
-   	  });   
+       	 }
+       });   
  });
 
     $("#button_submit").click(function(){
@@ -133,6 +133,8 @@ $("#button_classify").click(function(){
 //		$('#result_json').text(JSONResult);
 //		$('#result_json').text(new XMLSerializer().serializeToString(data));
 				$('#result_json').text(JSON.stringify(data,0,2));
+	      console.log("Length: " +data.entities.length);
+	      console.log(JSON.stringify(data.entities,0,2));
         // $('#result_json').text(JSON.stringify(data,undefined, 2)); -- Original code
       });
     });
