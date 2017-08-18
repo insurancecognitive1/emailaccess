@@ -21,6 +21,7 @@ var conversation = watson.conversation({
 app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/ui'));
+app.use(bodyParser());
 
 /*app.use(bodyParser.urlencoded({
     extended: true
