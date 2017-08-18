@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Entity Extraction Test</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+	<div class="container">
+  		<div class="row">
+    		<div class="col-md-2"></div>
+    		<div class="col-md-8">
+          <h1>Enter Data </h1>
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="model-id">Model Id :</label>
+              <div class="col-sm-10">
+                <input type="model-id" class="form-control" id="model-id" placeholder="Enter Model Id ">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="api-key">API Key :</label>
+              <div class="col-sm-10">
+                <input type="api-key" class="form-control" id="api-key" placeholder="Enter API Key ">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                  <label for="content">Content :</label>
+                  <textarea class="form-control" rows="20" id="content"></textarea>
+
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="button" id="button_classify" class="btn btn-default">Classify</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="button" id="button_submit" class="btn btn-default">Annotate</button>
+              </div>
+            </div>
+          </form>
+          <div>
+            <pre id="result_json">
+            </pre>
+          </div>
+    		</div>
+    		<div class="col-md-2"></div>
+  		</div>
+  	</div>
+  </body>
+  <!-- Script -->
+  <script>
+
+$("#button_classify").click(function(){
+      console.log("On Click nlc");
+      var content=document.getElementById('content').value;
+//      content = '"' + content + '"';
+	  var context = {};
+	  content = content.replace(/(\r\n|\n|\r|\t)/gm,"");
+      var email_data = {
+        'text': content,
+        'context': context
+      }; 
+    console.log(email_data);
+      $.post("/api/emailclassify", email_data, function(result) {
+      	
+      	         console.log("Json resp: " +result);
+        if (result !== "") {
+           var resp = JSON.parse('{"result":' + result + '}');
+          //  console.log("Json resp: " +JSON.stringify(resp,0,2));
+            $('#result_json').text('Classified as' + JSON.stringify(resp.result.intents[0].intent,0,2));
+           // if (!resp.result.hasOwnProperty("code")) { }
+       	}
+   	  });   
+ });
+
+    $("#button_submit").click(function(){
+      console.log("On Click");
+      var model_id=document.getElementById('model-id').value;
+      var api_key=document.getElementById('api-key').value;
+      var content=document.getElementById('content').value;
+      model_id = model_id || '52a97231-93ef-4a82-9802-ae28aa2be7fd';
+      api_key = api_key || '90fe9c14ea3f03d20366c272f2733fccabfd27fd';
+      var url="https://gateway-a.watsonplatform.net/calls/text/TextGetRankedNamedEntities?showSourceText=0&model="+model_id+"&apikey="+api_key+"&outputMode=json";
+      $.post(url,
+      {
+        'text':content
+      },
+      function(data, status){
+        console.log("Data!");
+//		var JSONResult=JSON.stringify(data,undefined, 2);
+//		$('#result_json').text(JSONResult);
+//		$('#result_json').text(new XMLSerializer().serializeToString(data));
+				$('#result_json').text(JSON.stringify(data,0,2));
+        // $('#result_json').text(JSON.stringify(data,undefined, 2)); -- Original code
+      });
+    });
+//	function objectToXml(obj) {
+//        var xml = '';
+//
+//        for (var prop in obj) {
+//            if (!obj.hasOwnProperty(prop)) {
+//                continue;
+//            }
+//
+//            if (obj[prop] == undefined)
+//                continue;
+//
+//            xml += "<" + prop + ">";
+//            if (typeof obj[prop] == "object")
+//                xml += objectToXml(new Object(obj[prop]));
+//            else
+//                xml += obj[prop];
+//
+//            xml += "<!--" + prop + "-->";
+//        }
+//
+//        return xml;
+//    }
+
+  </script>
+</html>
