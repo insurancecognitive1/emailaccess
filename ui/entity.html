@@ -17,21 +17,20 @@
 <script>
 $(document).ready(function() {
       $.get("/api/rawemail", function(result) {      	
-      	console.log("Json resp: " +result);
+      	console.log("Actual result: " +result);
         if (result !== "") {
-           //document.getElementById('content').value = result;
            console.log("Json resp: " +JSON.stringify(result,0,2));
 	   var emailcontent;
-	   //emailcontent = result.replace(/<br>/gm, "\br");
-		emailcontent = result.replace(/<br\s*[\/]?>/gi, "newbreakline");
-	         console.log("replaced breakline Json resp: " +JSON.stringify(emailcontent,0,2));
-	   emailcontent = $(emailcontent).text();
-	   emailcontent = emailcontent.replace(/(\r\n|\n)/gm,"");
-			   console.log("Before Text format1: " +JSON.stringify(emailcontent,0,2));
-	   emailcontent = emailcontent.replace(/newbreakline/gm,"\n");
-	   console.log("After Text format2: " +JSON.stringify(emailcontent,0,2));
+	   //emailcontent = result.replace(/<br\s*[\/]?>/gi, "newbreakline");
+	   //console.log("replaced breakline Json resp: " +JSON.stringify(emailcontent,0,2));
+	   emailcontent = $(result).text();
+	   //emailcontent = $(emailcontent).text();
+	   //emailcontent = emailcontent.replace(/(\r\n|\n)/gm,"");
+	   //console.log("Before Text format: " +JSON.stringify(emailcontent,0,2));
+	   //emailcontent = emailcontent.replace(/newbreakline/gm,"\n");
+	   //console.log("After Text format: " +JSON.stringify(emailcontent,0,2));
            //$('#content').text(emailcontent);
-		document.getElementById('content').innerHTML = emailcontent;
+	   document.getElementById('content').innerHTML = emailcontent;
        	}
       });   
 });
