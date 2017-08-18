@@ -69,6 +69,8 @@ var client = MicrosoftGraph.Client.init({
         console.log('connected successfully');
     client
     .api('/me/messages')
+    .Prefer("outlook.body-content-type", "text") 
+     //.header("Prefer: outlook.body-content-type","text")
     .get((err, res) => {
         if (err) {
             console.log(err)
