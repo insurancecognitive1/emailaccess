@@ -21,8 +21,12 @@ $(document).ready(function() {
         if (result !== "") {
            //document.getElementById('content').value = result;
            console.log("Json resp: " +JSON.stringify(result,0,2));
-	   var emailcontent = $(result).text();
-	   emailcontent = emailcontent.replace(/(\r\n|\n|\r|\t)/gm,"");
+	   var emailcontent;
+	   emailcontent = result.replace(/<br>/gm, "\br");
+	   
+	   emailcontent = $(result).text();
+	   emailcontent = emailcontent.replace(/(\r\n|\n)/gm,"");
+	   emailcontent = emailcontent.replace(/\br/gm,"\n");
 	   console.log("Text format: " +JSON.stringify(emailcontent,0,2));
            $('#content').text(emailcontent);
        	}
