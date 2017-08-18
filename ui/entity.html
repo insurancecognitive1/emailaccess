@@ -101,11 +101,13 @@ $("#button_classify").click(function(){
     console.log(email_data);
       $.post("/api/emailclassify", email_data, function(result) {
       	
-      	         console.log("Json resp: " +result);
+      	console.log("Json resp: " +result);
         if (result !== "") {
            var resp = JSON.parse('{"result":' + result + '}');
-          //  console.log("Json resp: " +JSON.stringify(resp,0,2));
-            $('#result_json').text('Classified as' + JSON.stringify(resp.result.intents[0].intent,0,2));
+           //  console.log("Json resp: " +JSON.stringify(resp,0,2));
+	   var intent = JSON.stringify(resp.result.intents[0].intent,0,2);
+           intent = intent.replace(/_/gm," ");
+            $('#result_json').text('Classified as ' +intent.bold());
            // if (!resp.result.hasOwnProperty("code")) { }
        	}
    	  });   
