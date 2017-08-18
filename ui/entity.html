@@ -128,13 +128,24 @@ $("#button_classify").click(function(){
         'text':content
       },
       function(data, status){
-        console.log("Data!");
+         console.log("Data!");
 //		var JSONResult=JSON.stringify(data,undefined, 2);
 //		$('#result_json').text(JSONResult);
 //		$('#result_json').text(new XMLSerializer().serializeToString(data));
-				$('#result_json').text(JSON.stringify(data,0,2));
-	      console.log("Length: " +data.entities.length);
-	      console.log(JSON.stringify(data.entities,0,2));
+	 //$('#result_json').text(JSON.stringify(data,0,2));
+	 console.log("Length: " +data.entities.length);
+	 console.log(JSON.stringify(data.entities,0,2));
+	 var entities_length = data.entities.length;
+	 var annoate_rslt = "";
+	 var entity_type, entity_text;
+	 for (var i = 0; i < entities_length; i++){
+	     entity_type = data.entities[i].type;
+	     entity_text = data.entities[i].text;
+	     annoate_rslt += entity_type + " : " + entity_text + "</br>";
+	 }
+	 document.getElementById('result_json').innerHTML = annoate_rslt;    
+		
+	      
         // $('#result_json').text(JSON.stringify(data,undefined, 2)); -- Original code
       });
     });
