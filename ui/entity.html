@@ -25,7 +25,7 @@ $(document).ready(function() {
 	   //emailcontent = result.replace(/<br>/gm, "\br");
 		emailcontent = result.replace(/<br\s*[\/]?>/gi, "newbreakline");
 	         console.log("replaced breakline Json resp: " +JSON.stringify(emailcontent,0,2));
-	   emailcontent = $(result).text();
+	   emailcontent = $(emailcontent).text();
 	   emailcontent = emailcontent.replace(/(\r\n|\n)/gm,"");
 			   console.log("Before Text format1: " +JSON.stringify(emailcontent,0,2));
 	   emailcontent = emailcontent.replace(/"newbreakline"/gm,"\r\n");
