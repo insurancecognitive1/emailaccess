@@ -38,7 +38,8 @@ console.log('reached get');
         getemail(tokenresponse,function(ret){
             console.log(ret);
             //res.send( ret.content);
-            res.sendFile('entity.html' );
+               res.sendFile('ui/entity.html', { root : __dirname});
+
         });
         console.log('Completed');
         
