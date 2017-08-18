@@ -19,7 +19,7 @@ $(document).ready(function() {
       $.get("/api/rawemail", function(result) {      	
       	console.log("Json resp: " +result);
         if (result !== "") {
-           document.getElementById('content').value = result;
+           //document.getElementById('content').value = result;
            console.log("Json resp: " +JSON.stringify(result,0,2));
            $('#content').text(result);
        	}
