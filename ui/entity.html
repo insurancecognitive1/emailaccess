@@ -107,7 +107,9 @@ $("#button_classify").click(function(){
            //  console.log("Json resp: " +JSON.stringify(resp,0,2));
 	   var intent = JSON.stringify(resp.result.intents[0].intent,0,2);
            intent = intent.replace(/_/gm," ");
-            $('#result_json').text('Classified as ' +intent.bold());
+		
+	   document.getElementById('result_json').innerHTML = "Classified as " + "<b>" + intent + "</b>";
+            //$('#result_json').text('Classified as ' +intent);
            // if (!resp.result.hasOwnProperty("code")) { }
        	}
    	  });   
