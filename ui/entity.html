@@ -21,6 +21,8 @@ $(document).ready(function() {
         if (result !== "") {
            //document.getElementById('content').value = result;
            console.log("Json resp: " +JSON.stringify(result,0,2));
+	   var result = $(result).text();
+		           console.log("Text format: " +JSON.stringify(result,0,2));
            $('#content').text(result);
        	}
       });   
