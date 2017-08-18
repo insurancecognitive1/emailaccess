@@ -27,9 +27,11 @@ $(document).ready(function() {
 	         console.log("replaced breakline Json resp: " +JSON.stringify(emailcontent,0,2));
 	   emailcontent = $(result).text();
 	   emailcontent = emailcontent.replace(/(\r\n|\n)/gm,"");
-	   emailcontent = emailcontent.replace(/"newbreakline"/gm,"\n");
-	   console.log("Text format: " +JSON.stringify(emailcontent,0,2));
-           $('#content').text(emailcontent);
+			   console.log("Before Text format1: " +JSON.stringify(emailcontent,0,2));
+	   emailcontent = emailcontent.replace(/"newbreakline"/gm,"\r\n");
+	   console.log("After Text format2: " +JSON.stringify(emailcontent,0,2));
+           //$('#content').text(emailcontent);
+		document.getElementById('content').innerHTML = emailcontent;
        	}
       });   
 });
