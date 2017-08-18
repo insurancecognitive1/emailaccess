@@ -141,6 +141,7 @@ $("#button_classify").click(function(){
 	 for (var i = 0; i < entities_length; i++){
 	     entity_type = data.entities[i].type;
 	     entity_text = data.entities[i].text;
+	     entity_type = entity_type.replace(/_/gm," ");
 	     annoate_rslt += entity_type + " : " + entity_text + "</br>";
 	 }
 	 document.getElementById('result_json').innerHTML = annoate_rslt;    
