@@ -38,10 +38,13 @@ $(document).ready(function() {
          //$('#content').text(emailcontent);
 	document.getElementById('content').innerHTML = emailcontent;
       }
-   });  
+   }); 
+	
    //To get the model id and api key 
    $.get("/api/modeldata", function(result) {
      console.log("Model ID and API Key: " +result);
+     document.getElementById('model-id').innerHTML = result.model_id;
+     document.getElementById('api-key').innerHTML = result.api_key;    
    });	
 });
 	
