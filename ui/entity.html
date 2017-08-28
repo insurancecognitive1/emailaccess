@@ -15,25 +15,27 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   
 <script>
+var emailtoken = "";
+
 $(document).ready(function() {
-      $.get("/api/rawemail", function(result) {      	
-      	console.log("Actual result: " +result);
-        if (result !== "") {
-           console.log("Json resp: " +JSON.stringify(result,0,2));
-	   var emailcontent;
-		emailcontent = result;
-	   //emailcontent = result.replace(/<br\s*[\/]?>/gi, "newbreakline");
-	   //console.log("replaced breakline Json resp: " +JSON.stringify(emailcontent,0,2));
-	   //emailcontent = $(result).text();    /////////
-	   //emailcontent = $(emailcontent).text();
-	   //emailcontent = emailcontent.replace(/(\r\n|\n)/gm,"");
-	   //console.log("Before Text format: " +JSON.stringify(emailcontent,0,2));
-	   //emailcontent = emailcontent.replace(/newbreakline/gm,"\n");
-	   //console.log("After Text format: " +JSON.stringify(emailcontent,0,2));
-           //$('#content').text(emailcontent);
-	   document.getElementById('content').innerHTML = emailcontent;
-       	}
-      });   
+   $.get("/api/rawemail", function(result) {      	
+       console.log("Actual result: " +result);
+       if (result !== "") {
+         console.log("Json resp: " +JSON.stringify(result,0,2));
+	 var emailcontent;
+	 emailcontent = result;
+	 //emailcontent = result.replace(/<br\s*[\/]?>/gi, "newbreakline");
+	 //console.log("replaced breakline Json resp: " +JSON.stringify(emailcontent,0,2));
+	 //emailcontent = $(result).text();    /////////
+	 //emailcontent = $(emailcontent).text();
+	 //emailcontent = emailcontent.replace(/(\r\n|\n)/gm,"");
+	 //console.log("Before Text format: " +JSON.stringify(emailcontent,0,2));
+	 //emailcontent = emailcontent.replace(/newbreakline/gm,"\n");
+	 //console.log("After Text format: " +JSON.stringify(emailcontent,0,2));
+         //$('#content').text(emailcontent);
+	document.getElementById('content').innerHTML = emailcontent;
+      }
+   });   
 });
 </script>
 	  
@@ -69,6 +71,9 @@ $(document).ready(function() {
               <div class="col-sm-offset-2 col-sm-10">
                 <button type="button" id="button_classify" class="btn btn-default">Classify</button>
               </div>
+	      <div class="col-sm-offset-2 col-sm-10">
+                <button type="button" id="button_next" class="btn btn-default">Next</button>
+              </div>
             </div>
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
@@ -87,33 +92,46 @@ $(document).ready(function() {
   </body>
   <!-- Script -->
   <script>
+	  
+  $("#button_next").click(function(){
+     console.log("Retrieving next email content");
+     $.get("/api/emailcontent", function(result) {      	
+        console.log("Actual result: " +result);
+        if (result !== "") {
+           console.log("Json resp: " +JSON.stringify(result,0,2));
+	   var emailcontent;
+	   emailcontent = result;
+	   document.getElementById('content').innerHTML = emailcontent;
+       	}
+     });   
+  });
 
-$("#button_classify").click(function(){
-      console.log("On Click nlc");
-      var content=document.getElementById('content').value;
-//      content = '"' + content + '"';
-      var context = {};
-      content = content.replace(/(\r\n|\n|\r|\t)/gm,"");
-      var email_data = {
+  $("#button_classify").click(function(){
+     console.log("Analysing the Email content");
+     var content=document.getElementById('content').value;
+     //content = '"' + content + '"';
+     var context = {};
+     content = content.replace(/(\r\n|\n|\r|\t)/gm,"");
+     var email_data = {
         'text': content,
         'context': context
-      }; 
-      console.log(email_data);
-      $.post("/api/emailclassify", email_data, function(result) {
+     }; 
+     console.log(email_data);
+     $.post("/api/emailclassify", email_data, function(result) {
       	
-      	console.log("Json resp: " +result);
-        if (result !== "") {
-           var resp = JSON.parse('{"result":' + result + '}');
-           //  console.log("Json resp: " +JSON.stringify(resp,0,2));
-	   var intent = JSON.stringify(resp.result.intents[0].intent,0,2);
-           intent = intent.replace(/_/gm," ");
+       console.log("Json resp: " +result);
+       if (result !== "") {
+          var resp = JSON.parse('{"result":' + result + '}');
+          //  console.log("Json resp: " +JSON.stringify(resp,0,2));
+	  var intent = JSON.stringify(resp.result.intents[0].intent,0,2);
+          intent = intent.replace(/_/gm," ");
 		
-	   document.getElementById('result_json').innerHTML = "Classified as " + "<b>" + intent + "</b>";
-            //$('#result_json').text('Classified as ' +intent);
-           // if (!resp.result.hasOwnProperty("code")) { }
-       	 }
-       });   
- });
+	  document.getElementById('result_json').innerHTML = "Classified as " + "<b>" + intent + "</b>";
+          //$('#result_json').text('Classified as ' +intent);
+          // if (!resp.result.hasOwnProperty("code")) { }
+       	}
+      });   
+   });
 
     $("#button_submit").click(function(){
       console.log("On Click");
