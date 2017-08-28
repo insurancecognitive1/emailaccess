@@ -38,8 +38,13 @@ $(document).ready(function() {
          //$('#content').text(emailcontent);
 	document.getElementById('content').innerHTML = emailcontent;
       }
-   });   
+   });  
+	//To get the model id and api key 
+	app.get("/api/modeldata", function(result) {
+       		console.log("Actual result: " +result);
+	});	
 });
+	
 </script>
 	  
 </head>
