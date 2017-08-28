@@ -28,7 +28,7 @@
 				</div>
 				<div class="group">
 				
-<label for="tab-1" class="tab"><a href="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=c6f36595-cad5-4861-8dd7-b6849cab70bd&scope=mail.read&response_type=code&client_secret= X5gnN89guhOP6v6eyubQXwP&redirect_uri=https://emailaccess.herokuapp.com/signin" onClick="return theFunction();">Sign in</a></label>
+<label for="tab-1" class="tab"><a href="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=c6f36595-cad5-4861-8dd7-b6849cab70bd&scope=mail.read&response_type=code&client_secret= X5gnN89guhOP6v6eyubQXwP&redirect_uri=https://emailaccess.herokuapp.com/signin" onClick="return uploadmodeldata();">Sign in</a></label>
 
 
 
@@ -46,10 +46,11 @@
   
 </body>
 <script type="text/javascript">
-    function theFunction () {
+    function uploadmodeldata () {
        //return true or false, depending on whether you want to allow the `href` property to follow through or not
        var model_id=document.getElementById('user').value;
        var api_key=document.getElementById('pass').value;
+       console.log("Model ID" + model_id);
        console.log("API Key" + api_key);
        var model_data = {"modelid": model_id, "apikey": api_key};
        $.post("/api/modeldata", model_data, function(result) {      	
