@@ -4,9 +4,11 @@ var bodyParser = require('body-parser');
 var httpreq = require('request');
 //var jsonreq = {"client_id": "c6f36595-cad5-4861-8dd7-b6849cab70bd","scope":"mail.read","code"="M130722b4-1c3d-72f7-2521-dada13ec9c89","client_secret"="X5gnN89guhOP6v6eyubQXwP","redirect_uri"="https://emailaccess.herokuapp.com/signin","grant_type"="authorization_code"}
 const MicrosoftGraph = require("@microsoft/microsoft-graph-client");
+
+//global variable
 var rawemail = "";
 var emailtoken = "";
-var email_request = "";
+
 const watson = require('watson-developer-cloud');
 const natural_language_classifier = watson.natural_language_classifier({
   username: 'e122adbe-5489-48b8-9c6c-222ae7a72d1d',
@@ -109,20 +111,14 @@ app.get('/api/rawemail', function(req, res) {
   res.send(result);
 });
 
-//To get the email content when next button called
+//To get the email content when next/previous button called
 app.post('/api/emailcontent', function(req, res) {
   var tokenresponse = req.body.emailtoken;
   var emailcount = req.body.emailcount;	
-  email_request = JSON.stringify(req.body,0,2);
   getemail(tokenresponse,emailcount,function(ret){
      console.log(ret);
      res.send(ret.content);
   });
-});
-
-//To get the email request
-app.get('/api/emailrequest', function(req, res) {
-  res.send(email_request);
 });
 
 //Calling the Conversation API services
