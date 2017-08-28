@@ -5,6 +5,7 @@ var httpreq = require('request');
 //var jsonreq = {"client_id": "c6f36595-cad5-4861-8dd7-b6849cab70bd","scope":"mail.read","code"="M130722b4-1c3d-72f7-2521-dada13ec9c89","client_secret"="X5gnN89guhOP6v6eyubQXwP","redirect_uri"="https://emailaccess.herokuapp.com/signin","grant_type"="authorization_code"}
 const MicrosoftGraph = require("@microsoft/microsoft-graph-client");
 var rawemail = "";
+var emailtoken = "";
 const watson = require('watson-developer-cloud');
 const natural_language_classifier = watson.natural_language_classifier({
   username: 'e122adbe-5489-48b8-9c6c-222ae7a72d1d',
@@ -48,6 +49,7 @@ console.log('reached get');
         var bodyjson = JSON.parse(body);
         var tokenresponse=bodyjson.access_token;
         console.log('Token ',tokenresponse);
+	emailtoken = tokenresponse; //global variable - it will be used in client side
         getemail(tokenresponse,function(ret){
             console.log(ret);
             //res.send( ret.content);
@@ -104,7 +106,14 @@ console.log('reached post');
 
 //To get the raw email
 app.get('/api/rawemail', function(req, res) {
-    res.send(rawemail);
+    var result = {"emailcontent": rawemail, "emailtoken": emailtoken};
+    res.send(result);
+});
+
+//To get the email content when next button called
+app.get('/api/emailcontent', function(req, res) {
+    var result = {"emailcontent": rawemail, "emailtoken": emailtoken};
+    res.send(result);
 });
 
 //Calling the Conversation API services
