@@ -39,10 +39,10 @@ $(document).ready(function() {
 	document.getElementById('content').innerHTML = emailcontent;
       }
    });  
-	//To get the model id and api key 
-	$.get("/api/moddata", function(result) {
-       	  console.log("Model result: " +result);
-	});	
+   //To get the model id and api key 
+   $.get("/api/modeldata", function(result) {
+     console.log("Model ID and API Key: " +result);
+   });	
 });
 	
 </script>
