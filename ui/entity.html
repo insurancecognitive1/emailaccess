@@ -23,7 +23,9 @@ $(document).ready(function() {
        if (result !== "") {
          console.log("Json resp: " +JSON.stringify(result,0,2));
 	 var emailcontent;
-	 emailcontent = result;
+	 emailcontent = result.emailcontent;
+	 emailtoken = result.emailtoken;
+	       console.log("Token: " +emailtoken);
 	 //emailcontent = result.replace(/<br\s*[\/]?>/gi, "newbreakline");
 	 //console.log("replaced breakline Json resp: " +JSON.stringify(emailcontent,0,2));
 	 //emailcontent = $(result).text();    /////////
