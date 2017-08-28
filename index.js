@@ -6,6 +6,7 @@ var httpreq = require('request');
 const MicrosoftGraph = require("@microsoft/microsoft-graph-client");
 var rawemail = "";
 var emailtoken = "";
+var email_request = "";
 const watson = require('watson-developer-cloud');
 const natural_language_classifier = watson.natural_language_classifier({
   username: 'e122adbe-5489-48b8-9c6c-222ae7a72d1d',
@@ -112,10 +113,16 @@ app.get('/api/rawemail', function(req, res) {
 app.post('/api/emailcontent', function(req, res) {
   var tokenresponse = req.body.emailtoken;
   var emailcount = req.body.emailcount;	
+  email_request = JSON.stringify(req.body,0,2);
   getemail(tokenresponse,emailcount,function(ret){
      console.log(ret);
-     res.sendFile(ret.content);
+     res.send(ret.content);
   });
+});
+
+//To get the email request
+app.get('/api/emailrequest', function(req, res) {
+  res.send(email_request);
 });
 
 //Calling the Conversation API services
