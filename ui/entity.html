@@ -140,7 +140,12 @@ $(document).ready(function() {
    });
 
     $("#button_submit").click(function(){
-      console.log("On Click");
+	    
+      $.get("/api/emailrequest", function(result) {      	
+        console.log("Email request result: " +result);
+      });
+	    
+      console.log("Annotation is in progress");
       var model_id=document.getElementById('model-id').value;
       var api_key=document.getElementById('api-key').value;
       var content=document.getElementById('content').value;
