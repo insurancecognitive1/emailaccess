@@ -121,7 +121,7 @@ app.post('/api/emailcontent', function(req, res) {
   });
 });
 
-var model_id = "";
+var model_id = "Test";
 var api_key = "";
 
 //To assign the model id and api key to global variable once "sign in" 
@@ -132,7 +132,7 @@ app.post('/api/modeldata', function(req, res) {
 });
 
 //To get the model id and api key 
-app.get('/api/moddata', function(req, res) {
+app.get('/api/modeldata', function(req, res) {
   res.send(model_id);
 });
 
