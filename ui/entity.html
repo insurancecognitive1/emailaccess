@@ -43,10 +43,10 @@ $(document).ready(function() {
    //To get the model id and api key 
    $.get("/api/modeldata", function(result) {
      console.log("Model ID and API Key: " +JSON.stringify(result,0,2));
-     var resp = JSON.parse('{"result":' + result + '}');
-     //var resp = JSON.parse(result);
-     document.getElementById('model-id').innerHTML = resp.result.model_id;
-     document.getElementById('api-key').innerHTML = "Test";    
+     //var resp = JSON.parse('{"result":' + result + '}');
+     var resp = JSON.stringify(result,0,2);
+     document.getElementById('model-id').innerHTML = resp.model_id;
+     document.getElementById('api-key').innerHTML = resp.api_key;    
    });	
 });
 	
