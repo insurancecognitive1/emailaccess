@@ -16,6 +16,7 @@
   
 <script>
 var emailtoken = "";
+var emailcount = 1;	
 
 $(document).ready(function() {
    $.get("/api/rawemail", function(result) {      	
@@ -24,8 +25,8 @@ $(document).ready(function() {
          console.log("Json resp: " +JSON.stringify(result,0,2));
 	 var emailcontent;
 	 emailcontent = result.emailcontent;
-	 emailtoken = result.emailtoken;
-	       console.log("Token: " +emailtoken);
+	 emailtoken = result.emailtoken; //Assigning the emailtoken initially
+	 console.log("Token: " +emailtoken);
 	 //emailcontent = result.replace(/<br\s*[\/]?>/gi, "newbreakline");
 	 //console.log("replaced breakline Json resp: " +JSON.stringify(emailcontent,0,2));
 	 //emailcontent = $(result).text();    /////////
@@ -97,7 +98,8 @@ $(document).ready(function() {
 	  
   $("#button_next").click(function(){
      console.log("Retrieving next email content");
-     $.get("/api/emailcontent", function(result) {      	
+     var email_req = {"emailtoken": emailtoken, "emailcount": emailcount};
+     $.post("/api/emailcontent", email_req, function(result) {      	
         console.log("Actual result: " +result);
         if (result !== "") {
            console.log("Json resp: " +JSON.stringify(result,0,2));
