@@ -100,6 +100,7 @@ $(document).ready(function() {
      console.log("Retrieving next email content");
      emailcount = emailcount + 1;
      var email_req = {"emailtoken": emailtoken, "emailcount": emailcount};
+	  console.log("email_request: "+JSON.stringify(email_req,0,2));
      $.post("/api/emailcontent", email_req, function(result) {      	
         console.log("Actual result: " +result);
         if (result !== "") {
