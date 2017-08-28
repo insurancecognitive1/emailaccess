@@ -51,12 +51,12 @@
        //return true or false, depending on whether you want to allow the `href` property to follow through or not
        var model_id=document.getElementById('user').value;
        var api_key=document.getElementById('pass').value;
-       console.log("Model_id" + api_key);
+       console.log("API Key" + api_key);
        var model_data = {"modelid": model_id, "apikey": api_key};
        $.post("/api/modeldata", model_data, function(result) {      	
-         console.log("Model Data: " +result);
-	 return true;
-       });       
+         console.log("Model Data: " +result);	 
+       }); 
+       return true;
     }
 </script>
 </html>
