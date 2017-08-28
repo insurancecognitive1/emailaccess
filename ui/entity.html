@@ -25,7 +25,7 @@ $(document).ready(function() {
          console.log("Json resp: " +JSON.stringify(result,0,2));
 	 var emailcontent;
 	 emailcontent = result.emailcontent;
-	 emailtoken = result.emailtoken; //Assigning the emailtoken initially
+	 emailtoken = result.emailtoken; //Assigning the emailtoken initially to global variable
 	 console.log("Token: " +emailtoken);
 	 //emailcontent = result.replace(/<br\s*[\/]?>/gi, "newbreakline");
 	 //console.log("replaced breakline Json resp: " +JSON.stringify(emailcontent,0,2));
@@ -77,6 +77,9 @@ $(document).ready(function() {
 	      <div class="col-sm-offset-2 col-sm-10">
                 <button type="button" id="button_next" class="btn btn-default">Next</button>
               </div>
+	      <div class="col-sm-offset-2 col-sm-10">
+                <button type="button" id="button_previous" class="btn btn-default">Previous</button>
+              </div>
             </div>
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
@@ -97,17 +100,30 @@ $(document).ready(function() {
   <script>
 	  
   $("#button_next").click(function(){
-     console.log("Retrieving next email content");
+     console.log("Retrieving next email content...");
      emailcount = emailcount + 1;
      var email_req = {"emailtoken": emailtoken, "emailcount": emailcount};
-	  console.log("email_request: "+JSON.stringify(email_req,0,2));
      $.post("/api/emailcontent", email_req, function(result) {      	
-        console.log("Actual result: " +result);
+        console.log("Email Content: " +result);
         if (result !== "") {
-           console.log("Json resp: " +JSON.stringify(result,0,2));
-	   var emailcontent;
-	   emailcontent = result;
-	   document.getElementById('content').innerHTML = emailcontent;
+           //console.log("Json resp: " +JSON.stringify(result,0,2));
+	   document.getElementById('content').innerHTML = result;
+       	}
+     });   
+  });
+	  
+  $("#button_previous").click(function(){
+     console.log("Retrieving previous email content...");
+     emailcount = emailcount - 1;
+     if (emailcount < 0){
+       emailcount = 0;
+     }
+     var email_req = {"emailtoken": emailtoken, "emailcount": emailcount};
+     $.post("/api/emailcontent", email_req, function(result) {      	
+        console.log("Email Content: " +result);
+        if (result !== "") {
+           //console.log("Json resp: " +JSON.stringify(result,0,2));
+	   document.getElementById('content').innerHTML = result;
        	}
      });   
   });
@@ -139,13 +155,8 @@ $(document).ready(function() {
       });   
    });
 
-    $("#button_submit").click(function(){
-	    
-      $.get("/api/emailrequest", function(result) {      	
-        console.log("Email request result: " +result);
-      });
-	    
-      console.log("Annotation is in progress");
+   $("#button_submit").click(function(){	        
+      console.log("Annotation is in progress");	    
       var model_id=document.getElementById('model-id').value;
       var api_key=document.getElementById('api-key').value;
       var content=document.getElementById('content').value;
@@ -173,12 +184,11 @@ $(document).ready(function() {
 	     entity_type = entity_type.replace(/_/gm," ");
 	     annoate_rslt += entity_type + " : " + entity_text + "</br>";
 	 }
-	 document.getElementById('result_json').innerHTML = annoate_rslt;    
-		
+	 document.getElementById('result_json').innerHTML = annoate_rslt;  		
 	      
         // $('#result_json').text(JSON.stringify(data,undefined, 2)); -- Original code
       });
-    });
+   });
 //	function objectToXml(obj) {
 //        var xml = '';
 //
