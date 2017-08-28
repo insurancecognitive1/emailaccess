@@ -50,20 +50,18 @@ console.log('reached get');
         var tokenresponse=bodyjson.access_token;
         console.log('Token ',tokenresponse);
 	emailtoken = tokenresponse; //global variable - it will be used in client side
-        getemail(tokenresponse,function(ret){
+	var emailcount = 0;
+        getemail(tokenresponse,emailcount,function(ret){
             console.log(ret);
             //res.send( ret.content);
             rawemail = ret.content;
-               res.sendFile('ui/entity.html', { root : __dirname});
-
+            res.sendFile('ui/entity.html', { root : __dirname});
         });
-        console.log('Completed');
-        
-    });
-    
+        console.log('Completed');        
+    });    
 });
 
-function getemail(tokenresponse,cb){
+function getemail(tokenresponse,emailcount,cb){
 var client = MicrosoftGraph.Client.init({
         authProvider: (done) => {
         done(null, tokenresponse);
@@ -82,43 +80,46 @@ var client = MicrosoftGraph.Client.init({
       
        res.value.forEach(function(jsonresp)
         {
-           // console.log(jsonresp);
-           // console.log('subject ',jsonresp.subject);
+           //console.log(jsonresp);
+           //console.log('subject ',jsonresp.subject);
            //console.log('bodypreview ',jsonresp.bodyPreview);
            console.log('body ',jsonresp.body);
         });
-        cb(res.value[0].body);
-        
+        //cb(res.value[0].body);
+	cb(res.value[emailcount].body);       
     });
 }
 
 app.get('/', function(req, res) {
-console.log('reached get'); 
-   // console.log(req.body);
-    res.sendFile('ui/index.html', { root : __dirname});
+  console.log('reached get'); 
+  //console.log(req.body);
+  res.sendFile('ui/index.html', { root : __dirname});
 });
 
 app.post('/', function(req, res) {
-console.log('reached post'); 
-    console.log(req.body);
-    res.send('Hello world post');
+  console.log('reached post'); 
+  console.log(req.body);
+  res.send('Hello world post');
 });
 
 //To get the raw email
 app.get('/api/rawemail', function(req, res) {
-    var result = {"emailcontent": rawemail, "emailtoken": emailtoken};
-    res.send(result);
+  var result = {"emailcontent": rawemail, "emailtoken": emailtoken};
+  res.send(result);
 });
 
 //To get the email content when next button called
-app.get('/api/emailcontent', function(req, res) {
-    var result = {"emailcontent": rawemail, "emailtoken": emailtoken};
-    res.send(result);
+app.post('/api/emailcontent', function(req, res) {
+  var tokenresponse = req.body.emailtoken;
+  var emailcount = req.body.emailcount;	
+  getemail(tokenresponse,emailcount,function(ret){
+     console.log(ret);
+     res.sendFile(ret.content);
+  });
 });
 
 //Calling the Conversation API services
 app.post('/api/emailclassify',function(req, res){
-
 
   console.log("Context Body: " +req.body.context);
   console.log("Text Body: " +req.body.text);
