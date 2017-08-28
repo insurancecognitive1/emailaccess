@@ -44,8 +44,9 @@ $(document).ready(function() {
    $.get("/api/modeldata", function(result) {
      console.log("Model ID and API Key: " +JSON.stringify(result,0,2));
      var resp = JSON.stringify(result,0,2);
-     document.getElementById('model-id').value = resp.model_id;
-     document.getElementById('api-key').value = resp.api_key;    
+     var parsed_resp = JSON.parse('{"result":' + resp + '}');
+     document.getElementById('model-id').value = parsed_resp.result.model_id;
+     document.getElementById('api-key').value = parsed_resp.result.api_key;    
    });	
 });
 	
@@ -133,6 +134,15 @@ $(document).ready(function() {
   });
 
   $("#button_classify").click(function(){
+	  
+	     //To get the model id and api key 
+   $.get("/api/modeldata", function(result) {
+     console.log("Model ID and API Key: " +JSON.stringify(result,0,2));
+     var resp = JSON.stringify(result,0,2);
+     document.getElementById('model-id').value = resp.model_id;
+     document.getElementById('api-key').value = resp.api_key;    
+   });	
+	  
      console.log("Analysing the Email content");
      var content=document.getElementById('content').value;
      //content = '"' + content + '"';
