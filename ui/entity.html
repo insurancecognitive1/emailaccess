@@ -124,7 +124,7 @@ $(document).ready(function() {
         if (result !== "") {
            //console.log("Json resp: " +JSON.stringify(result,0,2));
 	   document.getElementById('content').innerHTML = result;
-	   document.getElementById('result_json').value = "";
+	   document.getElementById('result_json').innerHTML = "";  //clearing the value in result area
        	}
      });   
   });
@@ -141,14 +141,14 @@ $(document).ready(function() {
         if (result !== "") {
            //console.log("Json resp: " +JSON.stringify(result,0,2));
 	   document.getElementById('content').innerHTML = result;
-	   document.getElementById('result_json').value = "";  //clearing the value in result area
+	   document.getElementById('result_json').innerHTML = "";  //clearing the value in result area
        	}
      });   
   });
 
   $("#button_classify").click(function(){
      console.log("Analysing the Email content");
-     document.getElementById('result_json').value = ""; //clearing the value in result area
+     document.getElementById('result_json').innerHTML = ""; //clearing the value in result area
      var content=document.getElementById('content').value;
      //content = '"' + content + '"';
      var context = {};
