@@ -16,7 +16,7 @@ var emailtoken = "";
 var emailcount = 0;	
 var modelid";
 var apikey;
-var classified_intent = "";
+//var classified_intent = "";
 	
 $(document).ready(function() {
    $.get("/api/rawemail", function(result) {      	
@@ -164,11 +164,11 @@ $(document).ready(function() {
        if (result !== "") {
           var resp = JSON.parse('{"result":' + result + '}');
           //  console.log("Json resp: " +JSON.stringify(resp,0,2));
-	  classified_intent = JSON.stringify(resp.result.intents[0].intent,0,2);
-          classified_intent = classified_intent.replace(/_/gm," ");
+	  var intent = JSON.stringify(resp.result.intents[0].intent,0,2);
+          intent = intent.replace(/_/gm," ");
 		
-	  document.getElementById('result_json').innerHTML = "Classified as " + "<b>" + classified_intent + "</b>";
-          //$('#result_json').text('Classified as ' +classified_intent);
+	  document.getElementById('result_json').innerHTML = "Classified as " + "<b>" + intent + "</b>";
+          //$('#result_json').text('Classified as ' +intent);
           // if (!resp.result.hasOwnProperty("code")) { }
        	}
       });   
