@@ -8,16 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/estyle.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script
-  src="https://code.jquery.com/jquery-3.1.1.min.js"
-  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-  crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   
 <script>
 var emailtoken = "";
 var emailcount = 0;	
-
+var modelid;
+var apikey;
+	
 $(document).ready(function() {
    $.get("/api/rawemail", function(result) {      	
        console.log("Actual result: " +result);
@@ -45,8 +44,10 @@ $(document).ready(function() {
      console.log("Model ID and API Key: " +JSON.stringify(result,0,2));
      var resp = JSON.stringify(result,0,2);
      var parsed_resp = JSON.parse('{"result":' + resp + '}');
-     document.getElementById('model-id').value = parsed_resp.result.model_id;
-     document.getElementById('api-key').value = parsed_resp.result.api_key;    
+     modelid = parsed_resp.result.model_id;
+     apikey = parsed_resp.result.api_key;
+     //document.getElementById('model-id').value = parsed_resp.result.model_id;   //Removed model id label in the entity app
+     //document.getElementById('api-key').value = parsed_resp.result.api_key;     //Removed api key label in the entity app
    });	
 });
 	
@@ -61,7 +62,7 @@ $(document).ready(function() {
     		<div class="col-md-8">
           <h1>Enter Data </h1>
           <form class="form-horizontal">
-            <div class="form-group">
+            <!--<div class="form-group">
               <label class="control-label col-sm-2" for="model-id">Model Id :</label>
               <div class="col-sm-10">
                 <input type="model-id" class="form-control" id="model-id" placeholder="Enter Model Id ">
@@ -72,7 +73,7 @@ $(document).ready(function() {
               <div class="col-sm-10">
                 <input type="api-key" class="form-control" id="api-key" placeholder="Enter API Key ">
               </div>
-            </div>
+            </div>-->
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
                   <label for="content">Content :</label>
@@ -89,6 +90,11 @@ $(document).ready(function() {
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
                 <button type="button" id="button_submit" class="btn btn-default">Annotate</button>
+              </div>
+            </div>
+	    <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="button" id="button_constructmail" class="btn btn-default">Construct Mail</button>
               </div>
             </div>
           </form>
@@ -162,8 +168,10 @@ $(document).ready(function() {
 
    $("#button_submit").click(function(){	        
       console.log("Annotation is in progress");	    
-      var model_id=document.getElementById('model-id').value;
-      var api_key=document.getElementById('api-key').value;
+      //var model_id=document.getElementById('model-id').value;  //Removed model id label in the entity app
+      //var api_key=document.getElementById('api-key').value;  //Removed api key label in the entity app
+      var model_id = modelid;
+      var api_key = apikey;
       var content=document.getElementById('content').value;
       model_id = model_id || '52a97231-93ef-4a82-9802-ae28aa2be7fd';
       api_key = api_key || '90fe9c14ea3f03d20366c272f2733fccabfd27fd';
