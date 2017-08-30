@@ -14,8 +14,9 @@
 <script>
 var emailtoken = "";
 var emailcount = 0;	
-var modelid;
+var modelid";
 var apikey;
+var classified_intent = "";
 	
 $(document).ready(function() {
    $.get("/api/rawemail", function(result) {      	
@@ -163,11 +164,11 @@ $(document).ready(function() {
        if (result !== "") {
           var resp = JSON.parse('{"result":' + result + '}');
           //  console.log("Json resp: " +JSON.stringify(resp,0,2));
-	  var intent = JSON.stringify(resp.result.intents[0].intent,0,2);
-          intent = intent.replace(/_/gm," ");
+	  classified_intent = JSON.stringify(resp.result.intents[0].intent,0,2);
+          classified_intent = classified_intent.replace(/_/gm," ");
 		
-	  document.getElementById('result_json').innerHTML = "Classified as " + "<b>" + intent + "</b>";
-          //$('#result_json').text('Classified as ' +intent);
+	  document.getElementById('result_json').innerHTML = "Classified as " + "<b>" + classified_intent + "</b>";
+          //$('#result_json').text('Classified as ' +classified_intent);
           // if (!resp.result.hasOwnProperty("code")) { }
        	}
       });   
@@ -193,7 +194,7 @@ $(document).ready(function() {
         'text':content
       },
       function(data, status){
-         console.log("Data!");
+         console.log("Annotated Data!");
 //		var JSONResult=JSON.stringify(data,undefined, 2);
 //		$('#result_json').text(JSONResult);
 //		$('#result_json').text(new XMLSerializer().serializeToString(data));
@@ -201,15 +202,15 @@ $(document).ready(function() {
 	 console.log("Length: " +data.entities.length);
 	 console.log(JSON.stringify(data.entities,0,2));
 	 var entities_length = data.entities.length;
-	 var annoate_rslt = "";
+	 var annotate_rslt = "";
 	 var entity_type, entity_text;
 	 for (var i = 0; i < entities_length; i++){
 	     entity_type = data.entities[i].type;
 	     entity_text = data.entities[i].text;
 	     entity_type = entity_type.replace(/_/gm," ");
-	     annoate_rslt += entity_type + " : " + entity_text + "</br>";
+	     annotate_rslt += entity_type + " : " + entity_text + "</br>";
 	 }
-	 document.getElementById('result_json').innerHTML = annoate_rslt;  		
+	 document.getElementById('result_json').innerHTML = annotate_rslt;  		
 	      
         // $('#result_json').text(JSON.stringify(data,undefined, 2)); -- Original code
       });
