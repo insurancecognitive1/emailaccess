@@ -146,6 +146,26 @@ $(document).ready(function() {
        	}
      });   
   });
+	  
+  $("#button_constructmail").click(function(){
+     console.log("Construct Email...");
+     document.getElementById('result_json').innerHTML = ""; //clearing the value in result area
+     
+     var construct_mail_content = "";
+     if (classified_intent == "Cerificate of Insurance"){
+	construct_mail_content = "To: reply to the sender" + "<br>" + "Subject: " + classified_intent 
+	  				+ "<br>" + "<br>" + "Thank you for reaching out to Insurance Cognitive! We are glad to help you on your certificate request for policy <<policy number>>. Please follow the below steps: " 
+	  				+ "<br>" + "<br>" + "1. You can download your policy certificate by clicking on " + new URL("https://www.google.com") + " link"
+					+ "<br>" + "2. When prompted for password please enter your date of birth in MMDDYYYY format"
+	     				+ "<br>" + "<br>" + "If you have any questions or issues, please reply back to insurancecognitive1@outlook.com
+	     				+ "<br>"  + "<br>" + "Thanks!"; 
+	document.getElementById('result_json').innerHTML = construct_mail_content;
+     }else{
+	construct_mail_content = "Sorry, We are unable to construct the mail.";
+     } 
+     document.getElementById('result_json').innerHTML = construct_mail_content;
+  });
+
 
   $("#button_classify").click(function(){
      console.log("Analysing the Email content");
@@ -165,7 +185,7 @@ $(document).ready(function() {
           var resp = JSON.parse('{"result":' + result + '}');
           //  console.log("Json resp: " +JSON.stringify(resp,0,2));
 	  classified_intent = JSON.stringify(resp.result.intents[0].intent,0,2);
-          classified_intent = intent.replace(/_/gm," ");
+          classified_intent = classified_intent.replace(/_/gm," ");
 		
 	  document.getElementById('result_json').innerHTML = "Classified as " + "<b>" + classified_intent + "</b>";
           //$('#result_json').text('Classified as ' +classified_intent);
