@@ -151,6 +151,10 @@ $(document).ready(function() {
 	  
   $("#button_constructmail").click(function(){
      console.log("Construct Email...");
+	  
+	  console.log("Intent: " +classified_intent);
+	  console.log("Policy number list : " +policy_number_list);
+	  console.log("To mail list : " +to_mail_list);
      document.getElementById('result_json').innerHTML = ""; //clearing the value in result area
      
      var construct_mail_content = "";
