@@ -139,6 +139,10 @@ app.get('/api/modeldata', function(req, res) {
 //To send a mail
 app.post('/api/sendmail',function(req,res){
   var tokenresponse = req.body.emailtoken;
+  var emailsubject = req.body.subject;
+  var emailtoaddress = req.body.to_address;
+  var emailbodycontent = req.body.body_content;
+	
   var client = MicrosoftGraph.Client.init({
                authProvider: (done) => {
        	          done(null, tokenresponse);
@@ -148,14 +152,16 @@ app.post('/api/sendmail',function(req,res){
 	
   // construct the email object 
   const mail = {
-    subject: "Microsoft Graph JavaScript Sample",
+    subject: emailsubject,
+    //subject: "Microsoft Graph JavaScript Sample"
     toRecipients: [{
         emailAddress: {
-            	address: "sathishkumar88.it@gmail.com"
+            	address: "sathishkumar88.it@gmail.com", "sathishkumar88.it@gmail.com"
         }
     }],
     body: {
-        content: "<h1>MicrosoftGraph JavaScript Sample</h1>Check out https://github.com/microsoftgraph/msgraph-sdk-javascript",
+        //content: "<h1>MicrosoftGraph JavaScript Sample</h1>Check out https://github.com/microsoftgraph/msgraph-sdk-javascript",
+	content: emailbodycontent,
         contentType: "html"
     }
   }
@@ -163,11 +169,10 @@ app.post('/api/sendmail',function(req,res){
   var status = "";
   client
   .api('/me/sendMail')
-  .post({message: mail}, (err, response) => {
-	
+  .post({message: mail}, (err, response) => {	
        if (err) {
          console.log(err);
-	 status = '"' + "failed to send mail" + err + '"' ;
+	 status = '"' + "failed to send mail " + err + '"' ;
        }else{	 
 	 status = response;
        }  
