@@ -217,6 +217,10 @@ $(document).ready(function() {
   $("#button_classify").click(function(){
      console.log("Analysing the Email content");
      document.getElementById('result_json').innerHTML = ""; //clearing the value in result area
+     //Disable the Construct and Send Mail button	   
+     document.getElementById("button_constructmail").disabled = true;
+     document.getElementById("button_sendmail").disabled = true;
+	  
      var content=document.getElementById('content').value;
      //content = '"' + content + '"';
      var context = {};
