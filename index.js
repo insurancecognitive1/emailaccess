@@ -169,7 +169,7 @@ app.post('/api/sendmail',function(req,res){
          console.log(err);
 	 status = '"' + "failed to send mail" + err + '"' ;
        }else{	 
-	 status = '"' + response + '"';
+	 status = response;
        }  
        res.send(status); 
   })
