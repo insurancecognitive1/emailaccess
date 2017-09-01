@@ -185,7 +185,8 @@ $(document).ready(function() {
      var send_req = {"emailtoken": emailtoken};
      $.post("/api/sendmail", send_req, function(result) {      	
         console.log("Send Mail response: " +result);
-        if (result.indexOf("failed to send mail") > -1 == true) {
+	     var rslt = JSON.stringify(result,0,2);
+        if (rslt.indexOf("failed to send mail") > -1 == true) {
            console.log("Send Mail failed Json resp: " +JSON.stringify(result,0,2));
        	}else{
 	   console.log("Send Mail Json resp: " +JSON.stringify(result,0,2));
