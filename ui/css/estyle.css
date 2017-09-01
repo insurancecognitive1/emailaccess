@@ -80,3 +80,11 @@ pre {
 	margin: 0;
 }
 
+.nextbtn{
+     padding-right: 76px;
+	    float: right;
+    margin-left: -50%;
+    margin-top: 2em;
+    margin-right: 1em;
+}
+
