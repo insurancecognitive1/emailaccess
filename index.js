@@ -153,14 +153,12 @@ app.post('/api/sendmail',function(req,res){
   // construct the email object 
   const mail = {
     subject: emailsubject,
-    //subject: "Microsoft Graph JavaScript Sample"
     toRecipients: [{
         emailAddress: {
-            	address: "sathishkumar88.it@gmail.com"
+            	address: "sathishkumar88.it@gmail.com; sathishkumar88.it@gmail.com"
         }
     }],
     body: {
-        //content: "<h1>MicrosoftGraph JavaScript Sample</h1>Check out https://github.com/microsoftgraph/msgraph-sdk-javascript",
 	content: emailbodycontent,
         contentType: "html"
     }
@@ -207,7 +205,7 @@ app.post('/api/emailclassify',function(req, res){
   });
 }); 
 
-//to classify teh email
+//to classify the email
 app.get('/classify',function(req,res){
 	console.log(req.query.text);
 	var text=req.query.text;
