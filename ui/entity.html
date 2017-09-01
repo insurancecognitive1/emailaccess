@@ -181,6 +181,16 @@ $(document).ready(function() {
      console.log("Send email to agent/user...");	  
      document.getElementById('result_json').innerHTML = ""; //clearing the value in result area
      document.getElementById('result_json').innerHTML = "We have successfully sent the mail to " + to_email_list;  
+	  
+     var send_req = {"emailtoken": emailtoken};
+     $.post("/api/sendmail", send_req, function(result) {      	
+        console.log("Send Mail response: " +result);
+        if (result !== "failed to send mail") {
+           console.log("Send Mail failed Json resp: " +JSON.stringify(result,0,2));
+       	}else{
+	   console.log("Send Mail Json resp: " +JSON.stringify(result,0,2));
+	}
+     });   
   });
 
 
