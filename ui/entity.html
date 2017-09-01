@@ -153,7 +153,7 @@ $(document).ready(function() {
 
   //To construct the mail content  
   $("#button_constructmail").click(function(){
-     console.log("Construct email...");	  
+     console.log("Construct Email...");	  
      document.getElementById('result_json').innerHTML = ""; //clearing the value in result area
 	  
      var construct_mail_subject = "";
@@ -177,18 +177,20 @@ $(document).ready(function() {
   
   //To send the mail to agent/user  
   $("#button_sendmail").click(function(){
-     console.log("Send email to agent/user...");	  
+     console.log("Send Email to Agent/User...");	  
      document.getElementById('result_json').innerHTML = ""; //clearing the value in result area
-     document.getElementById('result_json').innerHTML = "We have successfully sent the mail to " + "<b>" + to_email_list + "</b>";  
+     //document.getElementById('result_json').innerHTML = "We have successfully sent the mail to " + "<b>" + to_email_list + "</b>";  
 	  
      var send_req = {"emailtoken": emailtoken, "subject" : classified_intent, "to_address" : to_email_list, "body_content" : construct_mail_body};
      $.post("/api/sendmail", send_req, function(result) {      	
         console.log("Send Mail response: " +JSON.stringify(result,0,2));
 	var rslt = JSON.stringify(result,0,2);
-        if (rslt.indexOf("failed to send mail") > -1 == true) {
+        if (rslt.indexOf("statusCode") > -1 == true) {
            console.log("Mail Send Error: " +JSON.stringify(result,0,2));
+	   document.getElementById('result_json').innerHTML = "Sorry, there is an issue to send a mail to " + "<b>" + to_email_list + "</b>" + ". Please try again after sometime"; 
        	}else{
 	   console.log("Send Mail Json resp: " +JSON.stringify(result,0,2));
+	   document.getElementById('result_json').innerHTML = "We have successfully sent the mail to " + "<b>" + to_email_list + "</b>"; 
 	}
      });   
   });
