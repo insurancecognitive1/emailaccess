@@ -151,7 +151,7 @@ app.post('/api/sendmail',function(req,res){
     subject: "Microsoft Graph JavaScript Sample",
     toRecipients: [{
         emailAddress: {
-            	address: "sathishkumar88.it@gamil.com"
+            	address: "sathishkumar88.it@gmail.com"
         }
     }],
     body: {
