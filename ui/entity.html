@@ -17,6 +17,8 @@ var emailcount = 0;
 var modelid;
 var apikey;
 var classified_intent = "";
+var policy_number_list = "";
+var to_email_list = "";
 	
 $(document).ready(function() {
    $.get("/api/rawemail", function(result) {      	
@@ -152,16 +154,16 @@ $(document).ready(function() {
      document.getElementById('result_json').innerHTML = ""; //clearing the value in result area
      
      var construct_mail_content = "";
-     if (classified_intent == "Cerificate of Insurance"){
-	construct_mail_content = "To: reply to the sender" + "<br>" + "Subject: " + classified_intent 
-	  				+ "<br>" + "<br>" + "Thank you for reaching out to Insurance Cognitive! We are glad to help you on your certificate request for policy <<policy number>>. Please follow the below steps: " 
-	  				+ "<br>" + "<br>" + "1. You can download your policy certificate by clicking on " + new URL("https://www.google.com") + " link"
-					+ "<br>" + "2. When prompted for password please enter your date of birth in MMDDYYYY format"
-	     				+ "<br>" + "<br>" + "If you have any questions or issues, please reply back to insurancecognitive1@outlook.com"
-	     				+ "<br>"  + "<br>" + "Thanks!"; 
+     if (classified_intent == "Certificate of Insurance"){
+	construct_mail_content = "To: " + to_email_list + "<br>" + "Subject: " + classified_intent 
+	  		       + "<br>" + "<br>" + "Thank you for reaching out to Insurance Cognitive! We are glad to help you on your certificate request for " + policy_number_list + " . Please follow the below steps:"
+	  		       + "<br>" + "<br>" + "1. You can download your policy certificate by clicking on " + new URL("https://www.google.com") + " link"
+			       + "<br>" + "2. When prompted for password please enter your date of birth in MMDDYYYY format"
+	     		       + "<br>" + "<br>" + "If you have any questions or issues, please reply back to insurancecognitive1@outlook.com"
+	     		       + "<br>"  + "<br>" + "Thanks!"; 
 	document.getElementById('result_json').innerHTML = construct_mail_content;
      }else{
-	construct_mail_content = "Sorry, We are unable to construct the mail.";
+	construct_mail_content = "Sorry, We are unable to construct the mail. Please try again after sometime";
      } 
      document.getElementById('result_json').innerHTML = construct_mail_content;
   });
@@ -229,7 +231,14 @@ $(document).ready(function() {
 	     entity_text = data.entities[i].text;
 	     entity_type = entity_type.replace(/_/gm," ");
 	     annotate_rslt += entity_type + " : " + entity_text + "</br>";
+	     
+	     if (entity_type == "to email"){
+		to_email_list += to_email_list + entity_text + ";";
+	     }else if (entity_type == "policy number"){
+		policy_number_list += policy_number_list + "," + entity_text;
+	     }     
 	 }
+	 policy_number_list = policy_number_list.replace(",", ""); //To remove the comma in the prefix
 	 document.getElementById('result_json').innerHTML = annotate_rslt;  		
 	      
         // $('#result_json').text(JSON.stringify(data,undefined, 2)); -- Original code
