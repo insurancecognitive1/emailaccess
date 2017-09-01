@@ -158,7 +158,8 @@ $(document).ready(function() {
      document.getElementById('result_json').innerHTML = ""; //clearing the value in result area
      
      var construct_mail_content = "";
-     if (classified_intent == "Certificate of Insurance"){
+	  
+     if (classified_intent == ""Certificate of Insurance""){
 	construct_mail_content = "To: " + to_email_list + "<br>" + "Subject: " + classified_intent 
 	  		       + "<br>" + "<br>" + "Thank you for reaching out to Insurance Cognitive! We are glad to help you on your certificate request for " + policy_number_list + " . Please follow the below steps:"
 	  		       + "<br>" + "<br>" + "1. You can download your policy certificate by clicking on " + new URL("https://www.google.com") + " link"
