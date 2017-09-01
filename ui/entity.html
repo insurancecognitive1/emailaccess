@@ -22,6 +22,10 @@ var to_email_list = "";
 var construct_mail_body = "";
 	
 $(document).ready(function() {
+   //Disable the Construct and Send Mail button	   
+   document.getElementById("button_constructmail").disabled = true;
+   document.getElementById("button_sendmail").disabled = true;
+	
    $.get("/api/rawemail", function(result) {      	
        console.log("Actual result: " +result);
        if (result !== "") {
@@ -135,6 +139,9 @@ $(document).ready(function() {
            //console.log("Json resp: " +JSON.stringify(result,0,2));
 	   document.getElementById('content').innerHTML = result;
 	   document.getElementById('result_json').innerHTML = "";  //clearing the value in result area
+	   //Disable the Construct and Send Mail button	   
+   	   document.getElementById("button_constructmail").disabled = true;
+           document.getElementById("button_sendmail").disabled = true;
        	}
      });   
   });
@@ -152,6 +159,9 @@ $(document).ready(function() {
            //console.log("Json resp: " +JSON.stringify(result,0,2));
 	   document.getElementById('content').innerHTML = result;
 	   document.getElementById('result_json').innerHTML = "";  //clearing the value in result area
+	   //Disable the Construct and Send Mail button	   
+   	   document.getElementById("button_constructmail").disabled = true;
+           document.getElementById("button_sendmail").disabled = true;
        	}
      });   
   });
@@ -175,9 +185,11 @@ $(document).ready(function() {
 	     		       + "<br>" + "<br>" + "If you have any questions or issues, please reply back to insurancecognitive1@outlook.com"
 	     		       + "<br>"  + "<br>" + "Thanks!"; 
 	document.getElementById('result_json').innerHTML = construct_mail_subject + construct_mail_body;
+	document.getElementById("button_sendmail").disabled = false; //enable the sendmail button
      }else{
-	document.getElementById('result_json').innerHTML = "Sorry, We are unable to construct the mail. Please try again after sometime";
-     }      
+	document.getElementById('result_json').innerHTML = "Sorry, We are unable to construct the mail. Please try again after sometime.";
+     }
+     document.getElementById("button_constructmail").disabled = true; //disable the constructmail button once constructed the mail.    
   });
   
   //To send the mail to agent/user  
@@ -197,7 +209,8 @@ $(document).ready(function() {
 	   console.log("Send Mail Json resp: " +JSON.stringify(result,0,2));
 	   document.getElementById('result_json').innerHTML = "We have successfully sent the mail to " + "<b>" + to_email_list + "</b>"; 
 	}
-     });   
+     });  
+     document.getElementById("button_sendmail").disabled = true; //disable the sendmail button once mail sent to receipt. 
   });
 	  
 
@@ -271,8 +284,8 @@ $(document).ready(function() {
 	     }     
 	 }
 	 policy_number_list = policy_number_list.replace(",", ""); //To remove the comma in the prefix
-	 document.getElementById('result_json').innerHTML = annotate_rslt;  		
-	      
+	 document.getElementById('result_json').innerHTML = annotate_rslt; 
+   	 document.getElementById("button_constructmail").disabled = false; //Enable the Construct Mail button	 
         // $('#result_json').text(JSON.stringify(data,undefined, 2)); -- Original code
       });
    });
