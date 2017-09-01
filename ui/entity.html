@@ -290,6 +290,7 @@ $(document).ready(function() {
 	 policy_number_list = policy_number_list.replace(",", ""); //To remove the comma in the prefix
 	 document.getElementById('result_json').innerHTML = annotate_rslt; 
    	 document.getElementById("button_constructmail").disabled = false; //Enable the Construct Mail button	 
+	 document.getElementById("button_sendmail").disabled = true; //Disable the Send Mail button	
         // $('#result_json').text(JSON.stringify(data,undefined, 2)); -- Original code
       });
    });
