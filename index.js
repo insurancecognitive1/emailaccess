@@ -170,7 +170,8 @@ app.post('/api/sendmail',function(req,res){
   .post({message: mail}, (err, response) => {	
        if (err) {
          console.log(err);
-	 status = '"' + "failed to send mail " + err + '"' ;
+	 //status = '"' + "failed to send mail " + err + '"' ;
+	 status = err ;
        }else{	 
 	 status = response;
        }  
