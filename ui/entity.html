@@ -163,8 +163,8 @@ $(document).ready(function() {
      coiwebsite = coiwebsite.link("https://www.google.com");
 	  
      if (intent_identified == "Certificate of Insurance"){
-	construct_mail_content = "To: " + to_email_list + "<br>" + "Subject: " + classified_intent 
-	  		       + "<br>" + "<br>" + "Thank you for reaching out to Insurance Cognitive! We are glad to help you on your certificate request for " + policy_number_list + ". Please follow the below steps:"
+	construct_mail_content = "To: " + to_email_list + "<br>" + "Subject: " + intent_identified 
+	  		       + "<br>" + "<br>" + "Thank you for reaching out to Insurance Cognitive! We are glad to help you on your certificate request for " + "<b>" + policy_number_list + "</b>" + ". Please follow the below steps:"
 	  		       + "<br>" + "<br>" + "1. You can download your policy certificate by clicking on " + coiwebsite + " link"
 			       + "<br>" + "2. When prompted for password please enter your date of birth in MMDDYYYY format"
 	     		       + "<br>" + "<br>" + "If you have any questions or issues, please reply back to insurancecognitive1@outlook.com"
