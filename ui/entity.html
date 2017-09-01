@@ -19,6 +19,7 @@ var apikey;
 var classified_intent = "";
 var policy_number_list = "";
 var to_email_list = "";
+var construct_mail_body = "";
 	
 $(document).ready(function() {
    $.get("/api/rawemail", function(result) {      	
@@ -155,45 +156,43 @@ $(document).ready(function() {
      console.log("Construct email...");	  
      document.getElementById('result_json').innerHTML = ""; //clearing the value in result area
 	  
-     var construct_mail_content = "";
-     var intent_identified = classified_intent.substring(1,classified_intent.length - 1);
-     console.log("Intent identified: " +intent_identified);  
-	  
+     var construct_mail_subject = "";
      var coiwebsite = "this";
      coiwebsite = coiwebsite.link("https://www.google.com");
 	  
-     if (intent_identified == "Certificate of Insurance"){
-	construct_mail_content = "To: " + to_email_list + "<br>" + "Subject: " + intent_identified 
-	  		       + "<br>" + "<br>" + "Thank you for reaching out to Insurance Cognitive! We are glad to help you on your certificate request for " + "<b>" + policy_number_list + "</b>" + ". Please follow the below steps:"
+     classified_intent = classified_intent.substring(1,classified_intent.length - 1);
+	  
+     if (classified_intent == "Certificate of Insurance"){
+	construct_mail_subject = "To: " + to_email_list + "<br>" + "Subject: " + classified_intent + "<br>" + "<br>";
+	construct_mail_body = "Thank you for reaching out to Insurance Cognitive! We are glad to help you on your certificate request for " + "<b>" + policy_number_list + "</b>" + ". Please follow the below steps:"
 	  		       + "<br>" + "<br>" + "1. You can download your policy certificate by clicking on " + coiwebsite + " link"
 			       + "<br>" + "2. When prompted for password please enter your date of birth in MMDDYYYY format"
 	     		       + "<br>" + "<br>" + "If you have any questions or issues, please reply back to insurancecognitive1@outlook.com"
 	     		       + "<br>"  + "<br>" + "Thanks!"; 
-	document.getElementById('result_json').innerHTML = construct_mail_content;
+	document.getElementById('result_json').innerHTML = construct_mail_subject + construct_mail_body;
      }else{
-	construct_mail_content = "Sorry, We are unable to construct the mail. Please try again after sometime";
-     } 
-     document.getElementById('result_json').innerHTML = construct_mail_content;
+	document.getElementById('result_json').innerHTML = "Sorry, We are unable to construct the mail. Please try again after sometime";
+     }      
   });
   
   //To send the mail to agent/user  
   $("#button_sendmail").click(function(){
      console.log("Send email to agent/user...");	  
      document.getElementById('result_json').innerHTML = ""; //clearing the value in result area
-     document.getElementById('result_json').innerHTML = "We have successfully sent the mail to " + to_email_list;  
+     document.getElementById('result_json').innerHTML = "We have successfully sent the mail to " + "<b>" + to_email_list + "</b>";  
 	  
-     var send_req = {"emailtoken": emailtoken};
+     var send_req = {"emailtoken": emailtoken, "subject" : classified_intent, "to_address" : to_email_list, "body_content" : construct_mail_body};
      $.post("/api/sendmail", send_req, function(result) {      	
-        console.log("Send Mail response: " +result);
-	     var rslt = JSON.stringify(result,0,2);
+        console.log("Send Mail response: " +JSON.stringify(result,0,2));
+	var rslt = JSON.stringify(result,0,2);
         if (rslt.indexOf("failed to send mail") > -1 == true) {
-           console.log("Send Mail failed Json resp: " +JSON.stringify(result,0,2));
+           console.log("Mail Send Error: " +JSON.stringify(result,0,2));
        	}else{
 	   console.log("Send Mail Json resp: " +JSON.stringify(result,0,2));
 	}
      });   
   });
-
+	  
 
   $("#button_classify").click(function(){
      console.log("Analysing the Email content");
