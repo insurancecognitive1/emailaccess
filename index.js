@@ -155,7 +155,7 @@ app.post('/api/sendmail',function(req,res){
     subject: emailsubject,
     toRecipients: [{
         emailAddress: {
-            	address: "sathishkumar88.it@gmail.com; sathishkumar88.it@gmail.com"
+            	address: "sathishkumar88.it@gmail.com, sathishkumar88.it@gmail.com"
         }
     }],
     body: {
