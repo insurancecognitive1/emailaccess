@@ -154,7 +154,7 @@ $(document).ready(function() {
 	  
 	  console.log("Intent: " +classified_intent);
 	  console.log("Policy number list : " +policy_number_list);
-	  console.log("To mail list : " +to_mail_list);
+	  console.log("To mail list : " +to_email_list);
      document.getElementById('result_json').innerHTML = ""; //clearing the value in result area
      
      var construct_mail_content = "";
@@ -237,9 +237,9 @@ $(document).ready(function() {
 	     annotate_rslt += entity_type + " : " + entity_text + "</br>";
 	     
 	     if (entity_type == "to email"){
-		to_email_list += to_email_list + entity_text + ";";
+		to_email_list = to_email_list + entity_text + ";";
 	     }else if (entity_type == "policy number"){
-		policy_number_list += policy_number_list + "," + entity_text;
+		policy_number_list = policy_number_list + "," + entity_text;
 	     }     
 	 }
 	 policy_number_list = policy_number_list.replace(",", ""); //To remove the comma in the prefix
