@@ -38,7 +38,7 @@ app.use(bodyParser.json());
 app.get('/signin', function(req, res) {
     console.log('reached get'); 
     console.log(req.query.code);
-    var jsonreq = {grant_type:"authorization_code",client_id: "c6f36595-cad5-4861-8dd7-b6849cab70bd",scope:"mail.readwrite",code:req.query.code,client_secret:"X5gnN89guhOP6v6eyubQXwP",redirect_uri:"https://emailaccess.herokuapp.com/signin"};
+    var jsonreq = {grant_type:"authorization_code",client_id: "c6f36595-cad5-4861-8dd7-b6849cab70bd",scope:"mail.read mail.send",code:req.query.code,client_secret:"X5gnN89guhOP6v6eyubQXwP",redirect_uri:"https://emailaccess.herokuapp.com/signin"};
     console.log(jsonreq);
     httpreq({
     url: "https://login.microsoftonline.com/common/oauth2/v2.0/token",
@@ -167,7 +167,7 @@ app.post('/api/sendmail',function(req,res){
 	
        if (err) {
          console.log(err);
-	 status = '"' + "failed to send mail" + '"';
+	 status = '"' + "failed to send mail" + err + '"' ;
        }else{	 
 	 status = '"' + response + '"';
        }  
