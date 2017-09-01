@@ -176,6 +176,7 @@ $(document).ready(function() {
      var coiwebsite = "this";
      coiwebsite = coiwebsite.link("https://www.google.com");
 	  
+     construct_mail_body = "";
      identified_intent = classified_intent.substring(1,classified_intent.length - 1);
 	  
      if (identified_intent == "Certificate of Insurance"){
@@ -276,6 +277,8 @@ $(document).ready(function() {
 	 var entities_length = data.entities.length;
 	 var annotate_rslt = "";
 	 var entity_type, entity_text;
+	 policy_number_list = "";
+	 to_email_list = "";
 	 for (var i = 0; i < entities_length; i++){
 	     entity_type = data.entities[i].type;
 	     entity_text = data.entities[i].text;
