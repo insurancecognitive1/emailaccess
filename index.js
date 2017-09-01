@@ -173,7 +173,7 @@ app.post('/api/sendmail',function(req,res){
        }  
        res.send(status); 
   })
-}
+});
 
 //Calling the Conversation API services
 app.post('/api/emailclassify',function(req, res){
