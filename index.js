@@ -67,7 +67,7 @@ app.get('/signin', function(req, res) {
 });
 
 function getemail(tokenresponse,emailcount,cb){
-var client = MicrosoftGraph.Client.init({
+    var client = MicrosoftGraph.Client.init({
         authProvider: (done) => {
         done(null, tokenresponse);
              }
@@ -135,6 +135,45 @@ app.get('/api/modeldata', function(req, res) {
   var modeldata = {"model_id" : model_id, "api_key" : api_key};
   res.send(modeldata);
 });
+
+//To send a mail
+app.post('/api/sendmail',function(req,res){
+  var tokenresponse = req.body.emailtoken;
+  var client = MicrosoftGraph.Client.init({
+               authProvider: (done) => {
+       	          done(null, tokenresponse);
+               }
+  }); //first parameter takes an error if you can't get an access token 
+  console.log('connected successfully');
+	
+  // construct the email object 
+  const mail = {
+    subject: "Microsoft Graph JavaScript Sample",
+    toRecipients: [{
+        emailAddress: {
+            	address: "sathishkumar88.it@gamil.com"
+        }
+    }],
+    body: {
+        content: "<h1>MicrosoftGraph JavaScript Sample</h1>Check out https://github.com/microsoftgraph/msgraph-sdk-javascript",
+        contentType: "html"
+    }
+  }
+ 
+  var status = "";
+  client
+  .api('/me/sendMail')
+  .post({message: mail}, (err, response) => {
+	
+       if (err) {
+         console.log(err);
+	 status = '"' + "failed to send mail" + '"';
+       }else{	 
+	 status = '"' + response + '"';
+       }  
+       res.send(status); 
+  })
+}
 
 //Calling the Conversation API services
 app.post('/api/emailclassify',function(req, res){
