@@ -20,6 +20,7 @@ var classified_intent = "";
 var policy_number_list = "";
 var to_email_list = "";
 var construct_mail_body = "";
+var identified_intent = "";
 	
 $(document).ready(function() {
    //Disable the Construct and Send Mail button	   
@@ -175,10 +176,10 @@ $(document).ready(function() {
      var coiwebsite = "this";
      coiwebsite = coiwebsite.link("https://www.google.com");
 	  
-     classified_intent = classified_intent.substring(1,classified_intent.length - 1);
+     identified_intent = classified_intent.substring(1,classified_intent.length - 1);
 	  
-     if (classified_intent == "Certificate of Insurance"){
-	construct_mail_subject = "To: " + to_email_list + "<br>" + "Subject: " + classified_intent + "<br>" + "<br>";
+     if (identified_intent == "Certificate of Insurance"){
+	construct_mail_subject = "To: " + to_email_list + "<br>" + "Subject: " + identified_intent + "<br>" + "<br>";
 	construct_mail_body = "Thank you for reaching out to Insurance Cognitive! We are glad to help you on your certificate request for " + "<b>" + policy_number_list + "</b>" + ". Please follow the below steps:"
 	  		       + "<br>" + "<br>" + "1. You can download your policy certificate by clicking on " + coiwebsite + " link"
 			       + "<br>" + "2. When prompted for password please enter your date of birth in MMDDYYYY format"
@@ -198,7 +199,7 @@ $(document).ready(function() {
      document.getElementById('result_json').innerHTML = ""; //clearing the value in result area
      //document.getElementById('result_json').innerHTML = "We have successfully sent the mail to " + "<b>" + to_email_list + "</b>";  
 	  
-     var send_req = {"emailtoken": emailtoken, "subject" : classified_intent, "to_address" : to_email_list, "body_content" : construct_mail_body};
+     var send_req = {"emailtoken": emailtoken, "subject" : identified_intent, "to_address" : to_email_list, "body_content" : construct_mail_body};
      $.post("/api/sendmail", send_req, function(result) {      	
         console.log("Send Mail response: " +JSON.stringify(result,0,2));
 	var rslt = JSON.stringify(result,0,2);
