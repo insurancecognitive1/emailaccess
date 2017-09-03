@@ -135,7 +135,7 @@ $(document).ready(function() {
 	  
  $("#button_signout").click(function(){
      console.log("Sign Out the App...");
-     $.get("/signout", function(result) {      	
+     $.post("/signout", function(result) {      	
         console.log("Email Content: " +result);
         if (result !== "") {
        	}
