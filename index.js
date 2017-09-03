@@ -248,6 +248,29 @@ app.get('/signout', function(req, res) {
     });    
 });
 
+app.post('/signout', function(req, res) {
+    console.log('Sign Out..'); 
+    var jsonreq = {post_logout_redirect_uri:"https://emailaccess.herokuapp.com/"};
+    console.log(jsonreq);
+    httpreq({
+      url: "https://login.microsoftonline.com/common/oauth2/logout",
+    method: "POST",
+    headers: {
+        "content-type": "application/x-www-form-urlencoded",  // <--Very important!!!
+    },
+    form: jsonreq
+    }, function (error, response, body){
+	if (error){
+	   console.log('Error' ,error);
+	   res.sendFile('ui/entity.html', { root : __dirname}); 
+	}else{
+	  console.log('Response',response);
+	  console.log('Body',body);
+	  res.sendFile('ui/index.html', { root : __dirname}); 
+	} 
+    });    
+});
+
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
