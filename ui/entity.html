@@ -70,6 +70,7 @@ $(document).ready(function() {
     		<div class="col-md-2"></div>
     		<div class="col-md-8">
           <h1>Enter Data </h1>
+	  <button type="button" id="button_signout" class="nextbtn">Sign Out</button>
           <form class="form-horizontal">
             <!--<div class="form-group">
               <label class="control-label col-sm-2" for="model-id">Model Id :</label>
@@ -129,6 +130,15 @@ $(document).ready(function() {
   </body>
   <!-- Script -->
   <script>
+	  
+ $("#button_signout").click(function(){
+     console.log("Sign Out the App...");
+     $.get("/signout", function(result) {      	
+        console.log("Email Content: " +result);
+        if (result !== "") {
+       	}
+     });   
+  });
 	  
   $("#button_next").click(function(){
      console.log("Retrieving next email content...");
