@@ -239,10 +239,11 @@ app.get('/signout', function(req, res) {
     }, function (error, response, body){
 	if (error){
 	   console.log('Error' ,error);
+	   res.sendFile('ui/entity.html', { root : __dirname}); 
 	}else{
 	  console.log('Response',response);
 	  console.log('Body',body);
-	  res.sendFile('ui/entity.html', { root : __dirname}); 
+	  res.sendFile('ui/index.html', { root : __dirname}); 
 	} 
     });    
 });
