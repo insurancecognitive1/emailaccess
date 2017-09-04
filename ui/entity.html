@@ -53,8 +53,8 @@ $(document).ready(function() {
      console.log("Model ID and API Key: " +JSON.stringify(result,0,2));
      var resp = JSON.stringify(result,0,2);
      var parsed_resp = JSON.parse('{"result":' + resp + '}');
-     modelid = parsed_resp.result.model_id;
-     apikey = parsed_resp.result.api_key;
+     modelid = parsed_resp.result.model_id || '5dbd0bc1-da89-4ffc-ba1a-5d8be2f02933';
+     apikey = parsed_resp.result.api_key || '90fe9c14ea3f03d20366c272f2733fccabfd27fd';
      //document.getElementById('model-id').value = parsed_resp.result.model_id;   //Removed model id label in the entity app
      //document.getElementById('api-key').value = parsed_resp.result.api_key;     //Removed api key label in the entity app
    });	
@@ -70,7 +70,7 @@ $(document).ready(function() {
     		<div class="col-md-2"></div>
     		<div class="col-md-8">
           <h1>Enter Data </h1>
-	  <button type="button" id="button_signout" class="nextbtn">Sign Out</button>
+	  <!--<button type="button" id="button_signout" class="nextbtn">Sign Out</button>-->
 	  <label for="tab-1" class="tab"><a href="https://login.microsoftonline.com/common/oauth2/logout?post_logout_redirect_uri=https://emailaccess.herokuapp.com/">SignOut</a></label>
 
           <form class="form-horizontal">
