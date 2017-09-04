@@ -241,10 +241,10 @@ app.get('/signout', function(req, res) {
 	   console.log('Error' ,error);
 	   res.sendFile('ui/entity.html', { root : __dirname}); 
 	}else{
-	  console.log('Response',response);
-	  console.log('Body',body);
-	  //res.sendFile('ui/index.html', { root : __dirname}); 
-		res.send("You have successfully logged out the application.");
+	   console.log('Response',response);
+	   console.log('Body',body);
+	   res.sendFile('ui/index.html', { root : __dirname}); 
+	   //res.send("You have successfully logged out the application.");
 	} 
     }); 
 });
