@@ -71,7 +71,7 @@ $(document).ready(function() {
     		<div class="col-md-8">
           <h1>Enter Data </h1>
 	  <!--<button type="button" id="button_signout" class="nextbtn">Sign Out</button>-->
-	  <label for="tab-1" class="tab"><a href="https://login.microsoftonline.com/common/oauth2/logout?post_logout_redirect_uri=https://emailaccess.herokuapp.com&redirect_uri=https://emailaccess.herokuapp.com/signout" onClick="return logoff();" >SignOut</a></label>
+	  <label for="tab-1" class="tab"><a href="https://login.microsoftonline.com/common/oauth2/logout?post_logout_redirect_uri=https://emailaccess.herokuapp.com&redirect_uri=https://emailaccess.herokuapp.com/signout">SignOut</a></label>
 
           <form class="form-horizontal">
             <!--<div class="form-group">
@@ -131,21 +131,10 @@ $(document).ready(function() {
   		</div>
   	</div>
   </body>
-	
-  <script type="text/javascript">
-    function logoff() {
-    	var d = new Date();
-    	//document.cookie = "v0=1;expires=" + d.toGMTString() + ";" + ";";
-     	alert(document.cookie);
-        return true;
-    }
-  </script>
-	
+
   <!-- Script -->
   <script>
-	  
-
-	  
+  
  $("#button_signout").click(function(){
      console.log("Sign Out the App...");
      $.post("/signout", function(result) {      	
