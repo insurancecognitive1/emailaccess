@@ -135,11 +135,10 @@ $(document).ready(function() {
 	  
  $("#button_signout").click(function(){
      console.log("Sign Out the App...");
-     $.post("/signout", function(result) {      	
+     $.post("/signout"/*, function(result) {      	
         console.log("Logged result: " +result);
-        if (result !== "") {
-       	}
-     });   
+	window.location="https://emailaccess.herokuapp.com/";
+     }*/);   
   });
 	  
   $("#button_next").click(function(){
