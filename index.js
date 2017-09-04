@@ -243,7 +243,8 @@ app.get('/signout', function(req, res) {
 	}else{
 	  console.log('Response',response);
 	  console.log('Body',body);
-	  res.sendFile('ui/index.html', { root : __dirname}); 
+	  //res.sendFile('ui/index.html', { root : __dirname}); 
+		res.send("You have successfully logged out the application.");
 	} 
     }); 
 });
