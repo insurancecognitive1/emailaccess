@@ -117,7 +117,7 @@ $(document).ready(function() {
             </div>-->
 	    <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
-            	<pre style="white-space: normal; word-break: break-all; width: 600px" id="result_json"></pre>
+            	<pre style="white-space: normal; word-break: break-all;" id="result_json"></pre>
               </div>
             </div>
           </form>
@@ -198,7 +198,6 @@ $(document).ready(function() {
 	     		       + "<br>" + "<br>" + "If you have any questions or issues, please reply back to insurancecognitive1@outlook.com"
 	     		       + "<br>"  + "<br>" + "Thanks!"; 
 	document.getElementById('result_json').innerHTML = construct_mail_subject + construct_mail_body;
-	 document.getElementById('result_json').innerHTML = "Thank you for reaching out to Insurance Cognitive! We are glad to help you on your certificate request for 11UB11115634,11SBWAA1111,11KDGAB2222. Please follow the below steps:"    
 	document.getElementById("button_sendmail").disabled = false; //enable the sendmail button
      }else{
 	document.getElementById('result_json').innerHTML = "Sorry, We are unable to construct the mail. Please try again after sometime.";
