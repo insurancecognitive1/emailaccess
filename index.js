@@ -251,7 +251,8 @@ app.get('/signout', function(req, res) {
 
 app.post('/signout', function(req, res) {
     console.log('Sign Out..');
-    res.sendFile('ui/index.html', { root : __dirname}); 
+    //res.sendFile('ui/index.html', { root : __dirname}); 
+	res.redirect('ui/index.html');
     /*var jsonreq = {post_logout_redirect_uri:"https://emailaccess.herokuapp.com/"};
     console.log(jsonreq);
     httpreq({
