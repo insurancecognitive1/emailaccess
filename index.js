@@ -225,16 +225,17 @@ app.get('/classify',function(req,res){
 });
 
 app.get('/signout', function(req, res) {
-    console.log('Sign Out..'); 
-    var jsonreq = {post_logout_redirect_uri:"https://emailaccess.herokuapp.com/"};
+    console.log('Sign Out..');
+	res.sendFile('ui/index.html', { root : __dirname}); 
+    /*var jsonreq = {post_logout_redirect_uri:"https://emailaccess.herokuapp.com/"};
     console.log(jsonreq);
     httpreq({
     url: "https://emailaccess.herokuapp.com/",
-      //url: "https://login.microsoftonline.com/common/oauth2/logout",
+    url: "https://login.microsoftonline.com/common/oauth2/logout",
     method: "POST",
-    /*headers: {
+    headers: {
         "content-type": "application/x-www-form-urlencoded",  // <--Very important!!!
-    },*/
+    },
     form: jsonreq
     }, function (error, response, body){
 	if (error){
@@ -245,14 +246,14 @@ app.get('/signout', function(req, res) {
 	  console.log('Body',body);
 	  res.sendFile('ui/index.html', { root : __dirname}); 
 	} 
-    }); 
+    }); */
 });
 
-app.post('/signout', function(req, res) {
+/*app.post('/signout', function(req, res) {
     console.log('Sign Out..');
     res.sendFile('ui/index.html', { root : __dirname}); 
     //res.redirect('ui/index.html', { root : __dirname});
-    /*var jsonreq = {post_logout_redirect_uri:"https://emailaccess.herokuapp.com/"};
+    var jsonreq = {post_logout_redirect_uri:"https://emailaccess.herokuapp.com/"};
     console.log(jsonreq);
     httpreq({
       url: "https://login.microsoftonline.com/common/oauth2/logout",
@@ -270,8 +271,8 @@ app.post('/signout', function(req, res) {
 	  console.log('Body',body);
 	  res.sendFile('ui/index.html', { root : __dirname}); 
 	} 
-    }); */
-});
+    }); 
+});*/
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
