@@ -226,16 +226,16 @@ app.get('/classify',function(req,res){
 
 app.get('/signout', function(req, res) {
     console.log('Sign Out..'); 
-	res.sendFile('ui/index.html', { root : __dirname}); 
-    /*var jsonreq = {post_logout_redirect_uri:"https://emailaccess.herokuapp.com/"};
+	res.sendFile('ui/entity.html', { root : __dirname}); 
+    var jsonreq = {post_logout_redirect_uri:"https://emailaccess.herokuapp.com/"};
     console.log(jsonreq);
     httpreq({
-    //url: "https://login.microsoftonline.com/common/oauth2/v2.0/token",
-      url: "https://login.microsoftonline.com/common/oauth2/logout",
+    url: "https://emailaccess.herokuapp.com/",
+      //url: "https://login.microsoftonline.com/common/oauth2/logout",
     method: "POST",
-    headers: {
+    /*headers: {
         "content-type": "application/x-www-form-urlencoded",  // <--Very important!!!
-    },
+    },*/
     form: jsonreq
     }, function (error, response, body){
 	if (error){
@@ -246,7 +246,7 @@ app.get('/signout', function(req, res) {
 	  console.log('Body',body);
 	  res.sendFile('ui/index.html', { root : __dirname}); 
 	} 
-    }); */  
+    }); 
 });
 
 app.post('/signout', function(req, res) {
