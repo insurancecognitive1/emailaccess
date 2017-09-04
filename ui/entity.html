@@ -272,6 +272,10 @@ $(document).ready(function() {
       var content=document.getElementById('content').value;
       model_id = model_id || '52a97231-93ef-4a82-9802-ae28aa2be7fd';
       api_key = api_key || '90fe9c14ea3f03d20366c272f2733fccabfd27fd';
+	   
+      model_id = "5dbd0bc1-da89-4ffc-ba1a-5d8be2f02933";
+      api_key = "90fe9c14ea3f03d20366c272f2733fccabfd27fd";
+	   
       var url="https://gateway-a.watsonplatform.net/calls/text/TextGetRankedNamedEntities?showSourceText=0&model="+model_id+"&apikey="+api_key+"&outputMode=json";
       $.post(url,
       {
