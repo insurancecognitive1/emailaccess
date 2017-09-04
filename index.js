@@ -74,7 +74,7 @@ function getemail(tokenresponse,emailcount,cb){
             }); //first parameter takes an error if you can't get an access token 
         console.log('connected successfully');
     client
-    .api('/me/messages')
+    .api('/me/MailFolders/Inbox/messages')
     //.Prefer("outlook.body-content-type", "text") 
     .header("Prefer", "outlook.body-content-type=text")
     .get((err, res) => {
