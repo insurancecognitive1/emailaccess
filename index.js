@@ -226,7 +226,6 @@ app.get('/classify',function(req,res){
 
 app.get('/signout', function(req, res) {
     console.log('Sign Out..'); 
-	res.sendFile('ui/entity.html', { root : __dirname}); 
     var jsonreq = {post_logout_redirect_uri:"https://emailaccess.herokuapp.com/"};
     console.log(jsonreq);
     httpreq({
