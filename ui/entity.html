@@ -273,12 +273,11 @@ $(document).ready(function() {
       var model_id = modelid;
       var api_key = apikey;
       var content=document.getElementById('content').value;
-      model_id = model_id || '52a97231-93ef-4a82-9802-ae28aa2be7fd';
+      model_id = model_id || 'cb0351e7-a5e0-41d9-a8a7-19b7b5f505c8';
       api_key = api_key || '90fe9c14ea3f03d20366c272f2733fccabfd27fd';
-	   
-      //model_id = "15300f33-cd95-44b8-892f-76869e5f4822";
-      model_id = "cb0351e7-a5e0-41d9-a8a7-19b7b5f505c8";
-      api_key = "90fe9c14ea3f03d20366c272f2733fccabfd27fd";
+
+      //model_id = "cb0351e7-a5e0-41d9-a8a7-19b7b5f505c8";
+      //api_key = "90fe9c14ea3f03d20366c272f2733fccabfd27fd";
 	   
       var url="https://gateway-a.watsonplatform.net/calls/text/TextGetRankedNamedEntities?showSourceText=0&model="+model_id+"&apikey="+api_key+"&outputMode=json";
       $.post(url,
