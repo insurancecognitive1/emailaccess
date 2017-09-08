@@ -53,8 +53,8 @@ $(document).ready(function() {
      console.log("Model ID and API Key: " +JSON.stringify(result,0,2));
      var resp = JSON.stringify(result,0,2);
      var parsed_resp = JSON.parse('{"result":' + resp + '}');
-     modelid = parsed_resp.result.model_id || '4c7256dc-ba84-4594-a977-d242ee3b8377';
-     apikey = parsed_resp.result.api_key || '90fe9c14ea3f03d20366c272f2733fccabfd27fd';
+     modelid = 'cb0351e7-a5e0-41d9-a8a7-19b7b5f505c8';
+     apikey =  '90fe9c14ea3f03d20366c272f2733fccabfd27fd';
      //document.getElementById('model-id').value = parsed_resp.result.model_id;   //Removed model id label in the entity app
      //document.getElementById('api-key').value = parsed_resp.result.api_key;     //Removed api key label in the entity app
    });	
