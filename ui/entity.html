@@ -53,8 +53,8 @@ $(document).ready(function() {
      console.log("Model ID and API Key: " +JSON.stringify(result,0,2));
      var resp = JSON.stringify(result,0,2);
      var parsed_resp = JSON.parse('{"result":' + resp + '}');
-     modelid = '4b0b62a3-cc34-4f3a-99b5-341c7e8e5efd';
-     apikey =  '90fe9c14ea3f03d20366c272f2733fccabfd27fd';
+     modelid = parsed_resp.result.model_id || '4b0b62a3-cc34-4f3a-99b5-341c7e8e5efd';
+     apikey = parsed_resp.result.api_key || '90fe9c14ea3f03d20366c272f2733fccabfd27fd';
      //document.getElementById('model-id').value = parsed_resp.result.model_id;   //Removed model id label in the entity app
      //document.getElementById('api-key').value = parsed_resp.result.api_key;     //Removed api key label in the entity app
    });	
@@ -273,11 +273,11 @@ $(document).ready(function() {
       var model_id = modelid;
       var api_key = apikey;
       var content=document.getElementById('content').value;
-      model_id = model_id || '4c7256dc-ba84-4594-a977-d242ee3b8377';
+      model_id = model_id || '4b0b62a3-cc34-4f3a-99b5-341c7e8e5efd';
       api_key = api_key || '90fe9c14ea3f03d20366c272f2733fccabfd27fd';
 
-      model_id = "4b0b62a3-cc34-4f3a-99b5-341c7e8e5efd";
-      api_key = "90fe9c14ea3f03d20366c272f2733fccabfd27fd";
+     // model_id = "4b0b62a3-cc34-4f3a-99b5-341c7e8e5efd";
+     // api_key = "90fe9c14ea3f03d20366c272f2733fccabfd27fd";
 	   
       var url="https://gateway-a.watsonplatform.net/calls/text/TextGetRankedNamedEntities?showSourceText=0&model="+model_id+"&apikey="+api_key+"&outputMode=json";
       $.post(url,
