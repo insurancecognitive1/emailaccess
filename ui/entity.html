@@ -165,7 +165,7 @@ $(document).ready(function() {
      }); 
 	
      // Disable the next button once the last message received 
-     if (emailcount = (totalemailcount-1)){
+     if (emailcount == (totalemailcount-1)){
 	document.getElementById("button_next").disabled = true;
 	document.getElementById("button_previous").disabled = false;
      }else{
