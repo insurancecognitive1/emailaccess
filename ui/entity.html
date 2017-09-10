@@ -36,7 +36,7 @@ $(document).ready(function() {
 	 var emailcontent;
 	 emailcontent = result.emailcontent;
 	 emailtoken = result.emailtoken; //Assigning the emailtoken initially to global variable
-	 totalemailcount = result.totalemailcount; //Assigning the totalemailcount initially to global variable
+	 totalemailcount = result.totalemailcount-1; //Assigning the totalemailcount initially to global variable
 	 console.log("Total Email Count: " +totalemailcount);
 	 console.log("Token: " +emailtoken);
 	 //emailcontent = result.replace(/<br\s*[\/]?>/gi, "newbreakline");
@@ -165,7 +165,7 @@ $(document).ready(function() {
      }); 
 	
      // Disable the next button once the last message received 
-     if (emailcount == (totalemailcount-1)){
+     if (emailcount == totalemailcount){
 	document.getElementById("button_next").disabled = true;
 	document.getElementById("button_previous").disabled = false;
      }else{
