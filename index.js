@@ -10,6 +10,7 @@ var rawemail = "";
 var emailtoken = "";
 var model_id = "";
 var api_key = "";
+var totalemailcount = 0;
 
 const watson = require('watson-developer-cloud');
 const natural_language_classifier = watson.natural_language_classifier({
@@ -89,7 +90,9 @@ function getemail(tokenresponse,emailcount,cb){
            //console.log('subject ',jsonresp.subject);
            //console.log('bodypreview ',jsonresp.bodyPreview);
            console.log('body ',jsonresp.body);
+	   totalemailcount = totalemailcount+1;
         });
+	console.log("Email Count: " +emailcount);
         //cb(res.value[0].body);
 	cb(res.value[emailcount].body);       
     });
@@ -109,7 +112,7 @@ app.post('/', function(req, res) {
 
 //To get the raw email
 app.get('/api/rawemail', function(req, res) {
-  var result = {"emailcontent": rawemail, "emailtoken": emailtoken};
+  var result = {"emailcontent": rawemail, "emailtoken": emailtoken, "totalemailcount": totalemailcount};
   res.send(result);
 });
 
