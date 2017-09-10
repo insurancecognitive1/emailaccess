@@ -21,6 +21,7 @@ var policy_number_list = "";
 var to_email_list = "";
 var construct_mail_body = "";
 var identified_intent = "";
+var totalemailcount = "";
 	
 $(document).ready(function() {
    //Disable the Construct and Send Mail button	   
@@ -34,6 +35,8 @@ $(document).ready(function() {
 	 var emailcontent;
 	 emailcontent = result.emailcontent;
 	 emailtoken = result.emailtoken; //Assigning the emailtoken initially to global variable
+	 totalemailcount = result.totalemailcount; //Assigning the totalemailcount initially to global variable
+	       	 console.log("TotalEmailCount: " +totalemailcount);
 	 console.log("Token: " +emailtoken);
 	 //emailcontent = result.replace(/<br\s*[\/]?>/gi, "newbreakline");
 	 //console.log("replaced breakline Json resp: " +JSON.stringify(emailcontent,0,2));
