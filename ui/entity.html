@@ -36,7 +36,7 @@ $(document).ready(function() {
 	 emailcontent = result.emailcontent;
 	 emailtoken = result.emailtoken; //Assigning the emailtoken initially to global variable
 	 totalemailcount = result.totalemailcount; //Assigning the totalemailcount initially to global variable
-	       	 console.log("TotalEmailCount: " +totalemailcount);
+	 console.log("Total Email Count: " +totalemailcount);
 	 console.log("Token: " +emailtoken);
 	 //emailcontent = result.replace(/<br\s*[\/]?>/gi, "newbreakline");
 	 //console.log("replaced breakline Json resp: " +JSON.stringify(emailcontent,0,2));
@@ -161,7 +161,16 @@ $(document).ready(function() {
    	   document.getElementById("button_constructmail").disabled = true;
            document.getElementById("button_sendmail").disabled = true;
        	}
-     });   
+     }); 
+	
+     // Disable the next button once the last message received 
+     if (totalemailcount == emailcount){
+	document.getElementById("button_next").disabled = true;
+	document.getElementById("button_previous").disabled = false;
+     }else{
+	document.getElementById("button_next").disabled = false;
+	document.getElementById("button_previous").disabled = false; 
+     }
   });
 	  
   $("#button_previous").click(function(){
@@ -170,6 +179,15 @@ $(document).ready(function() {
      if (emailcount < 0){
        emailcount = 0;
      }
+     // Disable the previous button once the first message received   
+     if (emailcount == 0){
+       document.getElementById("button_previous").disabled = true;  
+       document.getElementById("button_next").disabled = false;  
+     }else{
+       document.getElementById("button_previous").disabled = false;  
+       document.getElementById("button_next").disabled = false;  
+     }
+	  
      var email_req = {"emailtoken": emailtoken, "emailcount": emailcount};
      $.post("/api/emailcontent", email_req, function(result) {      	
         console.log("Email Content: " +result);
