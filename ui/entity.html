@@ -24,9 +24,10 @@ var identified_intent = "";
 var totalemailcount = "";
 	
 $(document).ready(function() {
-   //Disable the Construct and Send Mail button	   
+   //Disable the Previous, Construct and Send Mail button	
+   document.getElementById("button_previous").disabled = true;
    document.getElementById("button_constructmail").disabled = true;
-   document.getElementById("button_sendmail").disabled = true;
+   document.getElementById("button_sendmail").disabled = true;  
 	
    $.get("/api/rawemail", function(result) {      	
        console.log("Actual result: " +result);
@@ -164,7 +165,7 @@ $(document).ready(function() {
      }); 
 	
      // Disable the next button once the last message received 
-     if (totalemailcount == emailcount){
+     if (emailcount = (totalemailcount-1)){
 	document.getElementById("button_next").disabled = true;
 	document.getElementById("button_previous").disabled = false;
      }else{
