@@ -133,7 +133,7 @@ function getattachment(tokenresponse,emailcount,cb){
            	 return;
         	}
       
-		console.log("Attachment Response: " +JSON.stringify(resp);
+		console.log("Attachment Response: " +JSON.stringify(resp));
 			    cb(resp);
     		});   
 	    
