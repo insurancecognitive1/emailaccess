@@ -109,7 +109,7 @@ function getattachment(tokenresponse,emailcount,cb){
             }); //first parameter takes an error if you can't get an access token 
         console.log('connected successfully');
     client
-    .api('/me/messages/')
+    .api('/me/MailFolders/Inbox/messages')
     //.Prefer("outlook.body-content-type", "text") 
     .header("Prefer", "outlook.body-content-type=text")
     .get((err, res) => {
@@ -121,12 +121,13 @@ function getattachment(tokenresponse,emailcount,cb){
         //cb(res.value[0].body);
 	console.log("message_id: "+JSON.stringify(res,0,2));
 	console.log("Actual Message ID: "+res.value[emailcount].id);
+	  	console.log("Parent folder Id: "+res.value[emailcount].parentfolderid);  
 	var message_id = "'" + res.value[emailcount].id + "'";
-	    message_id = "AQMkADAwATNiZmYAZC0wN2Y1LTQ4MjIALTAwAi0wMAoARgAAA-%0D%0Aa_1popu_5GpigqiMZUz5YHABNvUugGYcdMpZiCyEVCExcAAAIBDAAAABNvUugGYcdMpZiCyEVCExcAAAAk1rIOAAAA";
+	    message_id = "AQMkADAwATNiZmYAZC0wN2Y1LTQ4MjIALTAwAi0wMAoARgAAA%2Fa%2B1popu%2B5GpigqiMZUz5YHABNvUugGYcdMpZiCyEVCExcAAAIBDAAAABNvUugGYcdMpZiCyEVCExcAAAAk1rIOAAAA";
 	console.log("message_id: "+message_id);
 	    
  		client
-    		.api('/me/MailFolders/Inbox/messages/message_id/attachments')
+    		.api('/me/MailFolders/Inbox/messages/AQMkADAwATNiZmYAZC0wN2Y1LTQ4MjIALTAwAi0wMAoARgAAA%2Fa%2B1popu%2B5GpigqiMZUz5YHABNvUugGYcdMpZiCyEVCExcAAAIBDAAAABNvUugGYcdMpZiCyEVCExcAAAAk1rIOAAAA/attachments')
     		//.Prefer("outlook.body-content-type", "text") 
     		//.header("Prefer", "outlook.body-content-type=text")
     		.get((err, resp) => {
