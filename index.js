@@ -123,8 +123,8 @@ function getattachment(tokenresponse,emailcount,cb){
 	console.log("Actual Message ID: "+res.value[emailcount].id);
 	var message_id = res.value[emailcount].id;
 	console.log("message_id: "+message_id);
-	 
-		client
+	    
+ 		client
     		.api('/me/MailFolders/Inbox/messages/message_id/attachments')
     		//.Prefer("outlook.body-content-type", "text") 
     		//.header("Prefer", "outlook.body-content-type=text")
