@@ -120,7 +120,8 @@ function getattachment(tokenresponse,emailcount,cb){
 	    
         //cb(res.value[0].body);
 	    	console.log("message_id: "+JSON.stringify(res,0,2));
-	var message_id = res.value[emailcount].Id;  
+	    console.log("Actual Message ID: "+res.value[emailcount].id);
+	var message_id = res.value[emailcount].id;  
 	console.log("message_id: "+message_id);
 	 
 		client
