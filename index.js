@@ -57,9 +57,9 @@ app.get('/signin', function(req, res) {
         console.log('Token ',tokenresponse);
 	emailtoken = tokenresponse; //global variable - it will be used in client side
 	var emailcount = 0;
-	getattachment(tokenresponse,emailcount,function(ret){
+	/*getattachment(tokenresponse,emailcount,function(ret){
             console.log(ret);
-        });
+        });*/
         getemail(tokenresponse,emailcount,function(ret){
             console.log(ret);
             //res.send( ret.content);
@@ -101,7 +101,7 @@ function getemail(tokenresponse,emailcount,cb){
     });
 }
 
-function getattachment(tokenresponse,emailcount,cb){
+/*function getattachment(tokenresponse,emailcount,cb){
     var client = MicrosoftGraph.Client.init({
         authProvider: (done) => {
         done(null, tokenresponse);
@@ -141,7 +141,7 @@ function getattachment(tokenresponse,emailcount,cb){
     		});   
 	    
     });
-}
+}*/
 
 app.get('/', function(req, res) {
   console.log('reached get'); 
