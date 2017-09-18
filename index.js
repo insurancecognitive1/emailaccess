@@ -109,7 +109,7 @@ function getattachment(tokenresponse,emailcount,cb){
             }); //first parameter takes an error if you can't get an access token 
         console.log('connected successfully');
     client
-    .api('/me/MailFolders/Inbox/messages/')
+    .api('/me/messages/')
     //.Prefer("outlook.body-content-type", "text") 
     .header("Prefer", "outlook.body-content-type=text")
     .get((err, res) => {
@@ -119,14 +119,13 @@ function getattachment(tokenresponse,emailcount,cb){
         }
 	    
         //cb(res.value[0].body);
-	    	console.log("message_id: "+JSON.stringify(res,0,2));
-	    console.log("Actual Message ID: "+res.value[emailcount].id);
+	console.log("message_id: "+JSON.stringify(res,0,2));
+	console.log("Actual Message ID: "+res.value[emailcount].id);
 	var message_id = res.value[emailcount].id;
-	message_id = "5GpigqiMZUz5YHABNvUugGYcdMpZiCyEVCExcAAAIBDAAAABNvUugGYcdMpZiCyEVCExcAAAAk1rIOAAAA";
 	console.log("message_id: "+message_id);
 	 
 		client
-    		.api('/me/MailFolders/Inbox/messages/{message_id}/attachments')
+    		.api('/me/MailFolders/Inbox/messages/message_id/attachments')
     		//.Prefer("outlook.body-content-type", "text") 
     		//.header("Prefer", "outlook.body-content-type=text")
     		.get((err, resp) => {
