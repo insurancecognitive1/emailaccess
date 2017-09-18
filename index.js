@@ -127,10 +127,10 @@ function getattachment(tokenresponse,emailcount,cb){
 		client
     		.api('/me/MailFolders/Inbox/messages/message_id/attachments')
     		//.Prefer("outlook.body-content-type", "text") 
-    		.header("Prefer", "outlook.body-content-type=text")
+    		//.header("Prefer", "outlook.body-content-type=text")
     		.get((err, resp) => {
         	if (err) {
-            	console.log(err)
+            	 console.log(err)
            	 return;
         	}
       
