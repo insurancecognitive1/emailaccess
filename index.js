@@ -120,10 +120,8 @@ function getattachment(tokenresponse,emailcount,cb){
 	    
         //cb(res.value[0].body);
 	console.log("message_id: "+JSON.stringify(res,0,2));
-	console.log("Actual Message ID: "+res.value[emailcount].id);
-	  	console.log("Parent folder Id: "+res.value[emailcount].parentfolderid);  
-	var message_id = "'" + res.value[emailcount].id + "'";
-	    message_id = "AQMkADAwATNiZmYAZC0wN2Y1LTQ4MjIALTAwAi0wMAoARgAAA%2Fa%2B1popu%2B5GpigqiMZUz5YHABNvUugGYcdMpZiCyEVCExcAAAIBDAAAABNvUugGYcdMpZiCyEVCExcAAAAk1rIOAAAA";
+	console.log("Actual Message ID: "+res.value[emailcount].id);	    
+	var message_id = res.value[emailcount].id;	   
 	console.log("message_id: "+message_id);
 	    
  		client
@@ -136,8 +134,9 @@ function getattachment(tokenresponse,emailcount,cb){
            	 return;
         	}
       
-		console.log("Attachment Response: " +JSON.stringify(resp));
-			    cb(resp);
+		console.log("Attachment Response: " +JSON.stringify(resp,0,2));
+		console.log(new Buffer(resp.value[emailcount].contentBytes, 'base64').toString(''));
+		cb(resp);
     		});   
 	    
     });
