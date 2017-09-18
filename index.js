@@ -57,6 +57,9 @@ app.get('/signin', function(req, res) {
         console.log('Token ',tokenresponse);
 	emailtoken = tokenresponse; //global variable - it will be used in client side
 	var emailcount = 0;
+	getattachment(tokenresponse,emailcount,function(ret){
+            console.log(ret);
+        });
         getemail(tokenresponse,emailcount,function(ret){
             console.log(ret);
             //res.send( ret.content);
@@ -95,6 +98,45 @@ function getemail(tokenresponse,emailcount,cb){
 	console.log("Email Count: " +emailcount);
         //cb(res.value[0].body);
 	cb(res.value[emailcount].body);       
+    });
+}
+
+function getattachment(tokenresponse,emailcount,cb){
+    var client = MicrosoftGraph.Client.init({
+        authProvider: (done) => {
+        done(null, tokenresponse);
+             }
+            }); //first parameter takes an error if you can't get an access token 
+        console.log('connected successfully');
+    client
+    .api('/me/MailFolders/Inbox/messages/')
+    //.Prefer("outlook.body-content-type", "text") 
+    .header("Prefer", "outlook.body-content-type=text")
+    .get((err, res) => {
+        if (err) {
+            console.log(err)
+            return;
+        }
+	    
+        //cb(res.value[0].body);
+	    
+	var message_id = res.value[emailcount].Id;  
+	console.log("message_id: "+message_id);
+	 
+		client
+    		.api('/me/MailFolders/Inbox/messages/message_id/attachments')
+    		//.Prefer("outlook.body-content-type", "text") 
+    		.header("Prefer", "outlook.body-content-type=text")
+    		.get((err, resp) => {
+        	if (err) {
+            	console.log(err)
+           	 return;
+        	}
+      
+		console.log("Attachment Response: " +JSON.stringify(resp);
+			    cb(resp);
+    		});   
+	    
     });
 }
 
