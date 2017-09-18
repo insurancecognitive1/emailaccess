@@ -122,7 +122,7 @@ function getattachment(tokenresponse,emailcount,cb){
 	    	console.log("message_id: "+JSON.stringify(res,0,2));
 	    console.log("Actual Message ID: "+res.value[emailcount].id);
 	var message_id = res.value[emailcount].id;
-	message_id = "AQMkADAwATNiZmYAZC0wN2Y1LTQ4MjIALTAwAi0wMAoARgAAA-a_1popu_5GpigqiMZUz5YHABNvUugGYcdMpZiCyEVCExcAAAIBDAAAABNvUugGYcdMpZiCyEVCExcAAAAk1rIOAAAA";
+	message_id = "5GpigqiMZUz5YHABNvUugGYcdMpZiCyEVCExcAAAIBDAAAABNvUugGYcdMpZiCyEVCExcAAAAk1rIOAAAA";
 	console.log("message_id: "+message_id);
 	 
 		client
