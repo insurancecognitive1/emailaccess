@@ -125,7 +125,8 @@ function getattachment(tokenresponse,emailcount,cb){
 	console.log("message_id: "+message_id);
 	    
  		client
-    		.api('/me/MailFolders/Inbox/messages/AQMkADAwATNiZmYAZC0wN2Y1LTQ4MjIALTAwAi0wMAoARgAAA-a_1popu_5GpigqiMZUz5YHABNvUugGYcdMpZiCyEVCExcAAAIBDAAAABNvUugGYcdMpZiCyEVCExcAAAAk1rIOAAAA/attachments')
+    		//.api('/me/MailFolders/Inbox/messages/AQMkADAwATNiZmYAZC0wN2Y1LTQ4MjIALTAwAi0wMAoARgAAA-a_1popu_5GpigqiMZUz5YHABNvUugGYcdMpZiCyEVCExcAAAIBDAAAABNvUugGYcdMpZiCyEVCExcAAAAk1rIOAAAA/attachments')
+    		.api('/me/MailFolders/Inbox/messages/'+message_id+'/attachments')
     		//.Prefer("outlook.body-content-type", "text") 
     		//.header("Prefer", "outlook.body-content-type=text")
     		.get((err, resp) => {
