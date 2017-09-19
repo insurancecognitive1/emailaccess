@@ -209,14 +209,14 @@ app.post('/api/sendmail',function(req,res){
     body: {
 	content: emailbodycontent,
         contentType: "html"
-    },
+    }/*,
     "attachments": [
       {
         "@odata.type": "#Microsoft.OutlookServices.FileAttachment",
         "name": "menu.txt",
         "contentbytes": "bWFjIGFuZCBjaGVlc2UgdG9kYXk="
       }
-    ]
+    ]*/
   }
  
   var status = "";
