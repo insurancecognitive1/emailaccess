@@ -57,7 +57,7 @@ $(document).ready(function() {
      console.log("Model ID and API Key: " +JSON.stringify(result,0,2));
      var resp = JSON.stringify(result,0,2);
      var parsed_resp = JSON.parse('{"result":' + resp + '}');
-     modelid = parsed_resp.result.model_id || '60222a10-e483-41f4-ba56-4cc1b44c5755';
+     modelid = parsed_resp.result.model_id || '28bcf327-c3f1-4497-b9f0-4c8aaee7b78d';
      apikey = parsed_resp.result.api_key || '90fe9c14ea3f03d20366c272f2733fccabfd27fd';
      //document.getElementById('model-id').value = parsed_resp.result.model_id;   //Removed model id label in the entity app
      //document.getElementById('api-key').value = parsed_resp.result.api_key;     //Removed api key label in the entity app
@@ -295,7 +295,7 @@ $(document).ready(function() {
       var model_id = modelid;
       var api_key = apikey;
       var content=document.getElementById('content').value;
-      model_id = model_id || '60222a10-e483-41f4-ba56-4cc1b44c5755';
+      model_id = model_id || '28bcf327-c3f1-4497-b9f0-4c8aaee7b78d';
       api_key = api_key || '90fe9c14ea3f03d20366c272f2733fccabfd27fd';
 
      // model_id = "4b0b62a3-cc34-4f3a-99b5-341c7e8e5efd";
