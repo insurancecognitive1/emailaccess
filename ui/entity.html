@@ -295,7 +295,7 @@ $(document).ready(function() {
       var model_id = modelid;
       var api_key = apikey;
       var content=document.getElementById('content').value;
-      model_id = model_id || '677fd846-b3e3-4cdc-8115-8d415cbc1ffe';
+      model_id = model_id || '10:44b4d7d9-ce64-4782-a955-a872ff1d85dc';
       api_key = api_key || '90fe9c14ea3f03d20366c272f2733fccabfd27fd';
 
      // model_id = "4b0b62a3-cc34-4f3a-99b5-341c7e8e5efd";
@@ -303,7 +303,7 @@ $(document).ready(function() {
 	   
       //Added to use NLU Model - code start//
       var nlu_param = {
-	'modelid' : "10:44b4d7d9-ce64-4782-a955-a872ff1d85dc",
+	'modelid' : model_id,
         'text': content        
       }; 
       console.log("nlu parameter: "+JSON.stringify(nlu_param));
