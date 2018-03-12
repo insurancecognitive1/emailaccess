@@ -255,7 +255,7 @@ app.post('/api/emailclassify',function(req, res){
 
   conversation.message({
     //workspace_id: 'aed00036-e0d1-4a47-8906-e11b16f5f9f1',
-    workspace_id: '  20dbd94d-a682-43f6-81e1-03c157ea4208',
+    workspace_id: '20dbd94d-a682-43f6-81e1-03c157ea4208',
     input: {text: req.body.text},
     context: req.body.context,
     alternate_intents: true
