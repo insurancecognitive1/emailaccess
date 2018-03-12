@@ -18,11 +18,24 @@ const natural_language_classifier = watson.natural_language_classifier({
   password: 'ShXws2ujrNaE',
   version: 	'v1'
 });
-var conversation = watson.conversation({
+/*var conversation = watson.conversation({
   username: 'dccf3bfa-6e72-4589-a66d-1089784818cc',
   password: 'lENF1ZsL51Sp',
   version: 'v1',
   version_date: '2017-04-21'
+});*/
+var conversation = watson.conversation({
+  username: "e625d288-b092-4055-a026-7641046596ee",
+  password: "0Q5C5bhMdvnV",
+  version: 'v1',
+  version_date: '2017-04-21'
+});
+
+var NaturalLanguageUnderstandingV1 = require('watson-developer-cloud/natural-language-understanding/v1.js');
+var natural_language_understanding = new NaturalLanguageUnderstandingV1({
+  "username": "bf7a6b28-a7cb-4b07-9ca3-d0303f4ebc35",
+  "password": "CiHHmEuXCRh5",
+  'version_date': '2017-02-27'
 });
 
 app.set('port', (process.env.PORT || 5000));
@@ -241,7 +254,8 @@ app.post('/api/emailclassify',function(req, res){
   console.log("Text Body: " +req.body.text);
 
   conversation.message({
-    workspace_id: 'aed00036-e0d1-4a47-8906-e11b16f5f9f1',
+    //workspace_id: 'aed00036-e0d1-4a47-8906-e11b16f5f9f1',
+    workspace_id: '  20dbd94d-a682-43f6-81e1-03c157ea4208',
     input: {text: req.body.text},
     context: req.body.context,
     alternate_intents: true
@@ -328,13 +342,6 @@ app.get('/signout', function(req, res) {
 	} 
     }); 
 });*/
-
-  var NaturalLanguageUnderstandingV1 = require('watson-developer-cloud/natural-language-understanding/v1.js');
-  var natural_language_understanding = new NaturalLanguageUnderstandingV1({
-    "username": "bf7a6b28-a7cb-4b07-9ca3-d0303f4ebc35",
-    "password": "CiHHmEuXCRh5",
-    'version_date': '2017-02-27'
-  });
 
 //Calling the natural language undersation api services
 app.post('/api/smailnlu',function(req, res){
