@@ -329,6 +329,44 @@ app.get('/signout', function(req, res) {
     }); 
 });*/
 
+  var NaturalLanguageUnderstandingV1 = require('watson-developer-cloud/natural-language-understanding/v1.js');
+  var natural_language_understanding = new NaturalLanguageUnderstandingV1({
+    "username": "bf7a6b28-a7cb-4b07-9ca3-d0303f4ebc35",
+    "password": "CiHHmEuXCRh5",
+    'version_date': '2017-02-27'
+  });
+
+//Calling the natural language undersation api services
+app.post('/api/smailnlu',function(req, res){
+  console.log("NLU Model Id: " +req.body.modelid);
+  console.log("NLU Text: " +req.body.text);
+	
+  var parameters = {
+        'text': req.body.text,
+	'features': {
+    		'entities': {
+			'model': req.body.modelid
+    		},
+    		'keywords': {
+			'model': req.body.modelid
+    		},
+      		'relations': {
+        		'model': req.body.modelid
+  		}
+	}
+  }
+
+  natural_language_understanding.analyze(parameters, function(err, response) {
+    if (err){
+      console.log('NLU error:', err);
+      res.send(err);
+    } else{
+      console.log(JSON.stringify(response, null, 2));
+      res.send("NLU response: "+JSON.stringify(response,null,2));
+    }
+  }); 
+}); 
+
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
