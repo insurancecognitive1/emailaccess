@@ -362,7 +362,7 @@ app.post('/api/smailnlu',function(req, res){
       res.send(err);
     } else{
       console.log(JSON.stringify(response, null, 2));
-      res.send(JSON.stringify(response,null,2));
+      res.send(response);
     }
   }); 
 }); 
