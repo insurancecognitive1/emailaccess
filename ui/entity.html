@@ -307,24 +307,48 @@ $(document).ready(function() {
         'text': content        
       }; 
       console.log("nlu parameter: "+JSON.stringify(nlu_param));
-      $.post("/api/smailnlu", nlu_param, function(result) {      	
-        console.log("NLU Json resp: " +result);
-        if (result !== "") {
- 	 console.log("NLU Second Json resp: " +JSON.stringify(result));
+      $.post("/api/smailnlu", nlu_param, function(data) {      	
+        console.log("NLU Json resp: " +data);
+        if (data !== "") {
+	 console.log("Annotated Data!");
+	 console.log("Length: " +data.entities.length);
+	 console.log(JSON.stringify(data.entities,0,2));
+	 var entities_length = data.entities.length;
+	 var annotate_rslt = "";
+	 var entity_type, entity_text;
+	 policy_number_list = "";
+	 to_email_list = "";
+	 for (var i = 0; i < entities_length; i++){
+	     entity_type = data.entities[i].type;
+	     entity_text = data.entities[i].text;
+	     entity_type = entity_type.replace(/_/gm," ");
+	     annotate_rslt += entity_type + " : " + entity_text + "</br>";
+	     
+	     if (entity_type == "to email"){
+		to_email_list = to_email_list + entity_text + ";";
+	     }else if (entity_type == "policy number"){
+		policy_number_list = policy_number_list + "," + entity_text;
+	     }     
+	 }
+	 policy_number_list = policy_number_list.replace(",", ""); //To remove the comma in the prefix
+	 document.getElementById('result_json').innerHTML = annotate_rslt; 
+   	 document.getElementById("button_constructmail").disabled = false; //Enable the Construct Mail button	 
+	 document.getElementById("button_sendmail").disabled = true; //Disable the Send Mail button
        	}
       });
       //Added to use NLU Model - code end//
 	   
-      var url="https://gateway-a.watsonplatform.net/calls/text/TextGetRankedNamedEntities?showSourceText=0&model="+model_id+"&apikey="+api_key+"&outputMode=json";
+      //Added to use Alchemy Model - code start//   
+      /*var url="https://gateway-a.watsonplatform.net/calls/text/TextGetRankedNamedEntities?showSourceText=0&model="+model_id+"&apikey="+api_key+"&outputMode=json";
       $.post(url,
       {
         'text':content
       },
       function(data, status){
          console.log("Annotated Data!");
-//		var JSONResult=JSON.stringify(data,undefined, 2);
-//		$('#result_json').text(JSONResult);
-//		$('#result_json').text(new XMLSerializer().serializeToString(data));
+	 //var JSONResult=JSON.stringify(data,undefined, 2);
+	 //$('#result_json').text(JSONResult);
+         //$('#result_json').text(new XMLSerializer().serializeToString(data));
 	 //$('#result_json').text(JSON.stringify(data,0,2));
 	 console.log("Length: " +data.entities.length);
 	 console.log(JSON.stringify(data.entities,0,2));
@@ -351,7 +375,11 @@ $(document).ready(function() {
 	 document.getElementById("button_sendmail").disabled = true; //Disable the Send Mail button	
         // $('#result_json').text(JSON.stringify(data,undefined, 2)); -- Original code
       });
-   });
+   });*/
+   //Added to use Alchemy Model - code end//    
+   	  
+	  
+	  
 //	function objectToXml(obj) {
 //        var xml = '';
 //
