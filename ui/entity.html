@@ -301,6 +301,20 @@ $(document).ready(function() {
      // model_id = "4b0b62a3-cc34-4f3a-99b5-341c7e8e5efd";
      // api_key = "90fe9c14ea3f03d20366c272f2733fccabfd27fd";
 	   
+      //Added to use NLU Model - code start//
+      var nlu_param = {
+	'modelid' : model_id,
+        'text': content        
+      }; 
+      console.log("nlu parameter: "+JSON.stringify(nlu_param));
+      $.post("/api/smailnlu", nlu_param, function(result) {      	
+        console.log("NLU Json resp: " +result);
+        if (result !== "") {
+ 	 console.log("NLU Second Json resp: " +JSON.stringify(result));
+       	}
+      });
+      //Added to use NLU Model - code end//
+	   
       var url="https://gateway-a.watsonplatform.net/calls/text/TextGetRankedNamedEntities?showSourceText=0&model="+model_id+"&apikey="+api_key+"&outputMode=json";
       $.post(url,
       {
