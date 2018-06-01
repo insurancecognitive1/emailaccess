@@ -216,7 +216,7 @@ app.post('/api/sendmail',function(req,res){
     subject: emailsubject,
     toRecipients: [{
         emailAddress: {
-            	address: "insurancecognitive1@gmail.com"
+            	address: "meenakshi.ganapathiraman@cognizant.com"
         }
     }],
     body: {
