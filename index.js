@@ -236,7 +236,7 @@ app.post('/api/sendmail',function(req,res){
     subject: emailsubject,
     toRecipients: [{
         emailAddress: {
-            	address: "sathishkumar.a5@cognizant.com"
+            	address: "meenakshi.ganapathiraman@cognizant.com"
         }
     }],
     body: {
@@ -248,6 +248,52 @@ app.post('/api/sendmail',function(req,res){
   client
   .api('/me/sendMail')
   .post({message: mail2}, (err, response) => {	
+       if (err) {
+         console.log(err);
+       }else{	 
+	 status = response;
+       }  
+  })
+	
+  const mail3 = {
+    subject: emailsubject,
+    toRecipients: [{
+        emailAddress: {
+            	address: "Harjot.Kaur@cognizant.com"
+        }
+    }],
+    body: {
+	content: emailbodycontent,
+        contentType: "html"
+    }
+  }
+  
+  client
+  .api('/me/sendMail')
+  .post({message: mail3}, (err, response) => {	
+       if (err) {
+         console.log(err);
+       }else{	 
+	 status = response;
+       }  
+  })
+	
+  const mail4 = {
+    subject: emailsubject,
+    toRecipients: [{
+        emailAddress: {
+            	address: "Pranav.Agrawal@cognizant.com"
+        }
+    }],
+    body: {
+	content: emailbodycontent,
+        contentType: "html"
+    }
+  }
+  
+  client
+  .api('/me/sendMail')
+  .post({message: mail4}, (err, response) => {	
        if (err) {
          console.log(err);
        }else{	 
