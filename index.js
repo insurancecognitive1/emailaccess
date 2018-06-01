@@ -216,7 +216,7 @@ app.post('/api/sendmail',function(req,res){
     subject: emailsubject,
     toRecipients: [{
         emailAddress: {
-            	address: ["meenakshi.ganapathiraman@cognizant.com", "insurancecognitive1@gmail.com"]
+            	address: "insurancecognitive1@gmail.com"
         }
     }],
     body: {
@@ -231,6 +231,30 @@ app.post('/api/sendmail',function(req,res){
       }
     ]*/
   }
+  
+  const mail2 = {
+    subject: emailsubject,
+    toRecipients: [{
+        emailAddress: {
+            	address: "sathishkumar.a5@cognizant.com"
+        }
+    }],
+    body: {
+	content: emailbodycontent,
+        contentType: "html"
+    }
+  }
+  
+  client
+  .api('/me/sendMail')
+  .post({message: mail2}, (err, response) => {	
+       if (err) {
+         console.log(err);
+       }else{	 
+	 status = response;
+       }  
+  })
+  
  
   var status = "";
   client
