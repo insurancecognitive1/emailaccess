@@ -309,31 +309,39 @@ $(document).ready(function() {
       console.log("nlu parameter: "+JSON.stringify(nlu_param));
       $.post("/api/smailnlu", nlu_param, function(data) {      	
         console.log("NLU Json resp: " +data);
-        if (data !== "") {
+        if (data !== "" && data != "entity_model_error") {
 	 console.log("Annotated Data!");
 	 console.log("Length: " +data.entities.length);
 	 console.log(JSON.stringify(data.entities,0,2));
 	 var entities_length = data.entities.length;
-	 var annotate_rslt = "";
-	 var entity_type, entity_text;
-	 policy_number_list = "";
-	 to_email_list = "";
-	 for (var i = 0; i < entities_length; i++){
-	     entity_type = data.entities[i].type;
-	     entity_text = data.entities[i].text;
-	     entity_type = entity_type.replace(/_/gm," ");
-	     annotate_rslt += entity_type + " : " + entity_text + "</br>";
+         
+	 if (entities_length > 0){
+	    var annotate_rslt = "";
+	    var entity_type, entity_text;
+	    policy_number_list = "";
+	    to_email_list = "";
+	    for (var i = 0; i < entities_length; i++){
+	       entity_type = data.entities[i].type;
+	       entity_text = data.entities[i].text;
+	       entity_type = entity_type.replace(/_/gm," ");
+	       annotate_rslt += entity_type + " : " + entity_text + "</br>";
 	     
-	     if (entity_type == "to email"){
-		to_email_list = to_email_list + entity_text + ";";
-	     }else if (entity_type == "policy number"){
-		policy_number_list = policy_number_list + "," + entity_text;
-	     }     
-	 }
-	 policy_number_list = policy_number_list.replace(",", ""); //To remove the comma in the prefix
-	 document.getElementById('result_json').innerHTML = annotate_rslt; 
-   	 document.getElementById("button_constructmail").disabled = false; //Enable the Construct Mail button	 
-	 document.getElementById("button_sendmail").disabled = true; //Disable the Send Mail button
+	       if (entity_type == "to email"){
+		 to_email_list = to_email_list + entity_text + ";";
+	       }else if (entity_type == "policy number"){
+		 policy_number_list = policy_number_list + "," + entity_text;
+	       }     
+	    }
+	    policy_number_list = policy_number_list.replace(",", ""); //To remove the comma in the prefix
+	    document.getElementById('result_json').innerHTML = annotate_rslt; 
+   	    document.getElementById("button_constructmail").disabled = false; //Enable the Construct Mail button	 
+	    document.getElementById("button_sendmail").disabled = true; //Disable the Send Mail button
+	 }else{
+	   document.getElementById('result_json').innerHTML = "Apologies, there is an issue in the service to extract the details. Please try again later; 
+   	   document.getElementById("button_constructmail").disabled = false; //Enable the Construct Mail button	 
+	   document.getElementById("button_sendmail").disabled = false; //Disable the Send Mail button
+	 } 
+ 
        	}else{
 	  document.getElementById('result_json').innerHTML = "Apologies, there is an issue in the service to extract the details. Please try again later"; 
    	  document.getElementById("button_constructmail").disabled = false; //Enable the Construct Mail button	 
