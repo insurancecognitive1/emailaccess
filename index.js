@@ -436,7 +436,7 @@ app.post('/api/smailnlu',function(req, res){
   natural_language_understanding.analyze(parameters, function(err, response) {
     if (err){
       console.log('NLU Error:', err);
-      res.send("Entity Error");
+      res.send("entity_model_error");
     } else{
       console.log(JSON.stringify(response, null, 2));
       res.send(response);
