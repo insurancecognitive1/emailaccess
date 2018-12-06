@@ -279,8 +279,10 @@ $(document).ready(function() {
 	  document.getElementById('result_json').innerHTML = "Classified as " + "<b>" + classified_intent + "</b>";
           //$('#result_json').text('Classified as ' +classified_intent);
           // if (!resp.result.hasOwnProperty("code")) { }
-       	}
-      });   
+       }else{
+	 document.getElementById('result_json').innerHTML = "Apologies, we are unable to classify the content. Please try again later.";   
+       }
+     });   
    });
 
    $("#button_submit").click(function(){	
