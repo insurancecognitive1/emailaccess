@@ -347,15 +347,15 @@ app.post('/api/emailclassify',function(req, res){
 
 //to classify the email
 app.get('/classify',function(req,res){
-	console.log(req.query.text);
-	var text=req.query.text;
-	  natural_language_classifier.classify({ text: text ,  classifier_id: '1c5f1ex204-nlc-68213'},
+    console.log(req.query.text);
+    var text=req.query.text;
+    natural_language_classifier.classify({ text: text ,  classifier_id: '1c5f1ex204-nlc-68213'},
     function(err, tone) {
       if (err)
       {
         console.log(err);
-        res.send(err);
-    }
+        res.send("classify_error");
+      }
       else{
       	console.log(JSON.stringify(tone, null, 2));
         res.send(JSON.stringify(tone, null, 2));
