@@ -269,8 +269,8 @@ $(document).ready(function() {
      }; 
      console.log(email_data);
      $.post("/api/emailclassify", email_data, function(result) {      	
-       console.log("Json resp: " +result);
-       if (result !== "") {
+       console.log("Classify Json resp: " +JSON.stringify(result,0,2));
+       if (result !== "" && result != "classify_error") {
           var resp = JSON.parse('{"result":' + result + '}');
           //  console.log("Json resp: " +JSON.stringify(resp,0,2));
 	  classified_intent = JSON.stringify(resp.result.intents[0].intent,0,2);
