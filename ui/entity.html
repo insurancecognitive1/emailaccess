@@ -334,7 +334,11 @@ $(document).ready(function() {
 	 document.getElementById('result_json').innerHTML = annotate_rslt; 
    	 document.getElementById("button_constructmail").disabled = false; //Enable the Construct Mail button	 
 	 document.getElementById("button_sendmail").disabled = true; //Disable the Send Mail button
-       	}
+       	}else{
+	  document.getElementById('result_json').innerHTML = "Apologies, there is an issue in the service to extract the details. Please try again later"; 
+   	  document.getElementById("button_constructmail").disabled = false; //Enable the Construct Mail button	 
+	  document.getElementById("button_sendmail").disabled = false; //Disable the Send Mail button	
+	}
       });
       //Added to use NLU Model - code end//
 	   
