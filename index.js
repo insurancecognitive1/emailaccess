@@ -333,7 +333,7 @@ app.post('/api/emailclassify',function(req, res){
     if (err)
     {
       console.log('error:', err);
-      res.send(err);
+      res.send("classify_error");
     }
     else
     {
@@ -354,7 +354,7 @@ app.get('/classify',function(req,res){
       if (err)
       {
         console.log(err);
-        res.send("classify_error");
+        res.send(err);
       }
       else{
       	console.log(JSON.stringify(tone, null, 2));
