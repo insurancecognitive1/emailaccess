@@ -416,7 +416,11 @@ app.get('/signout', function(req, res) {
 //Calling the natural language undersation api services
 app.post('/api/smailnlu',function(req, res){
   console.log("NLU Model Id: " +req.body.modelid);
-  console.log("NLU Text: " +req.body.text);
+  console.log("NLU Text: " +req.body.text);	
+	
+  var output = {};
+  output.data = "";
+  output.error = "";
 	
   var parameters = {
         'text': req.body.text,
@@ -436,10 +440,12 @@ app.post('/api/smailnlu',function(req, res){
   natural_language_understanding.analyze(parameters, function(err, response) {
     if (err){
       console.log('NLU Error:', err);
-      res.send("entity_model_error");
+      output.error = "entity_model_error";
+      res.send(output);
     } else{
       console.log(JSON.stringify(response, null, 2));
-      res.send(response);
+      output.data = response;
+      res.send(output);
     }
   }); 
 }); 
