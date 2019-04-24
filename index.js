@@ -24,9 +24,16 @@ const natural_language_classifier = watson.natural_language_classifier({
   version: 'v1',
   version_date: '2017-04-21'
 });*/
-var conversation = watson.conversation({
+/*var conversation = watson.conversation({  //previous working version due to inactivity of using the service - it is auto deleted
   username: "e625d288-b092-4055-a026-7641046596ee",
   password: "0Q5C5bhMdvnV",
+  version: 'v1',
+  version_date: '2017-04-21'
+});*/
+
+var conversation = watson.conversation({
+  username: "7983fdd2-ac4d-4932-9161-05cf07771a7e",
+  password: "7UPQUzokpxln",
   version: 'v1',
   version_date: '2017-04-21'
 });
@@ -325,7 +332,8 @@ app.post('/api/emailclassify',function(req, res){
 
   conversation.message({
     //workspace_id: 'aed00036-e0d1-4a47-8906-e11b16f5f9f1',
-    workspace_id: '20dbd94d-a682-43f6-81e1-03c157ea4208',
+    //workspace_id: '20dbd94d-a682-43f6-81e1-03c157ea4208',  
+    workspace_id: 'b167a2c2-e1f6-4acf-970d-f5daa4367027',
     input: {text: req.body.text},
     context: req.body.context,
     alternate_intents: true
