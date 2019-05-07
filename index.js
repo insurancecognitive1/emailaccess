@@ -12,7 +12,7 @@ var model_id = "";
 var api_key = "";
 var totalemailcount = 0;
 
-const watson = require('watson-developer-cloud');
+const watson = require('watson-developer-cloud'); //it is deprecated, need to install and use "ibm-watson" package
 const natural_language_classifier = watson.natural_language_classifier({
   username: 'e122adbe-5489-48b8-9c6c-222ae7a72d1d',
   password: 'ShXws2ujrNaE',
@@ -30,13 +30,20 @@ const natural_language_classifier = watson.natural_language_classifier({
   version: 'v1',
   version_date: '2017-04-21'
 });*/
-
-var conversation = watson.conversation({
+/*var conversation = watson.conversation({
   username: "7983fdd2-ac4d-4932-9161-05cf07771a7e",
   password: "7UPQUzokpxln",
   version: 'v1',
   version_date: '2017-04-21'
+});*/
+
+var conversation = watson.conversation({
+  username: "apikey",
+  password: "Pt504hGHYHT7gTcqdE41C10xJLYfFHlBplyrlWCYDN1s",
+  version: 'v1',
+  version_date: '2019-02-28'
 });
+var conv_workspace_id = "90e9c1f0-8803-4a87-a2a7-bd8c077ecc69";
 
 var NaturalLanguageUnderstandingV1 = require('watson-developer-cloud/natural-language-understanding/v1.js');
 var natural_language_understanding = new NaturalLanguageUnderstandingV1({
@@ -333,7 +340,8 @@ app.post('/api/emailclassify',function(req, res){
   conversation.message({
     //workspace_id: 'aed00036-e0d1-4a47-8906-e11b16f5f9f1',
     //workspace_id: '20dbd94d-a682-43f6-81e1-03c157ea4208',  
-    workspace_id: 'b167a2c2-e1f6-4acf-970d-f5daa4367027',
+    //workspace_id: 'b167a2c2-e1f6-4acf-970d-f5daa4367027',
+    workspace_id: conv_workspace_id,
     input: {text: req.body.text},
     context: req.body.context,
     alternate_intents: true
